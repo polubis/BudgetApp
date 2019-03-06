@@ -1,0 +1,29 @@
+@import '../../../theme.scss';
+
+.btn {
+  cursor: pointer;
+  letter-spacing: 1.20px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.txt--btn {
+  border: none;
+  background: none;
+}
+
+.txt--btn--l-font {
+  color: $l-font;
+}
+
+.txt--btn--main-font {
+  color: $main;
+}
+
+
+
+.btn--normal {
+
+}
+

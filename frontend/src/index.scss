@@ -1,13 +1,39 @@
+@import './theme.scss';
+
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  color: $font;
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  & * {
+    box-sizing: border-box;
+  }
+}
+
+#root, .page {
+  min-height: 100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.row {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.col {
+  display: flex;
+  flex-flow: column;
+}
+
+.row-c {
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
 }

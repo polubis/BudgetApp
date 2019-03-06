@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
-import MaterialIcon from '@material/react-material-icon';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+
+import Home from './pages/Home/Home';
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        siema
-        <MaterialIcon icon='menu'/>
-      </div>
+      <BrowserRouter>
+        <Switch>
+
+          <Route exact path='/' component={Home} />
+
+
+        </Switch>
+        
+      </BrowserRouter>
     );
   }
 }

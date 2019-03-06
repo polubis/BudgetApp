@@ -9,7 +9,7 @@ import './index.scss';
 
 WebFont.load({
   google: {
-    families: ['Material+Icons', 'Roboto:300,400,600,700', 'sans-serif']
+    families: ['Material+Icons', 'Roboto:300,400,500,700', 'sans-serif']
   }
 });
 
