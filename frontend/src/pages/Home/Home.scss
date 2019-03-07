@@ -1,17 +1,54 @@
 @import '../../theme.scss';
 #homepage {
-  header {
-    height: 400px;
-    background-image: url('./assets/top-bg.png');
-    background-position: calc(100vw - 170px) -15px;
+  position: relative;
+  .top-bg-wrap, .bot-bg-wrap {
+    z-index: -1;
+  }
+  .top-bg-wrap {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 450px;
+      height: 450px;
+      background: url('./assets/top-bg.png') no-repeat 250px 12.5px;
+      background-size: contain;
+  }
+  .bot-bg-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: url('./assets/bot-bg.png') no-repeat -500px 450px;
+    width: 890px;
+    height: 852px;
+    background-size: cover;
+  }
+  main {
+    min-height: 100%;
     background-size: contain;
-    background-repeat: no-repeat;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      height: 2px;
+      background: $main;
+      width: calc(100vw - 4px);
+      top: -1px;
+      animation: 1.5s animate-line linear forwards;
+      @keyframes animate-line {
+        from {
+          left: -100vw;
+        }
+        to {
+          left: 0;
+        }
+      }
+    }
   }
 }
 
 .page__nav {
   width: 100%;
-  padding: 30px 0;
+  padding: 15px 0;
   .page__nav__wrap {
     margin-left: auto;
     .txt--btn--l-font {
@@ -20,10 +57,40 @@
   }
 }
 
+#guy-image {
+  width: 548px;
+  height: 604px;
+  margin-top: 100px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.page-header__sub {
+  font-size: 24px;
+  margin: 180px 0 12px 0;
+}
+
+.page-header__title {
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+#start-btn {
+  width: 200px;
+}
+
 @media(min-width: 1260px) {
   .page__nav {
     width: 1280px;
     margin: 0 auto;
   }
+  .home-main__content {
+    width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
 }
-

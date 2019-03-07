@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import Home from './pages/Home/Home';
+import Loadable from 'react-loadable';
 
+export const loading = () => {
+  return <div>Loading...</div>;
+}
+
+const Home = Loadable({
+  loader: () => import('./pages/Home/Home'), loading
+});
 
 class App extends Component {
   render() {

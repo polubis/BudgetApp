@@ -37,3 +37,20 @@ code {
   align-items: center;
   flex-flow: wrap;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+p,h1,h2,h3,h4,h5 {
+  margin: 0;
+}
+
+.main-color {
+  color: $main;
+}
+
+.l-font-color {
+  color: $l-font;
+}

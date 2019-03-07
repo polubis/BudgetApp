@@ -21,9 +21,20 @@
   color: $main;
 }
 
-
-
-.btn--normal {
-
+.txt--btn-bold {
+  font-weight: 600;
 }
 
+.bg--btn {
+  border: none;
+  padding: 15px;
+}
+
+.bg--btn-main {
+  background: $main;
+  color: $white;
+}
+
+.bg--btn-rounded {
+  border-radius: 1000px;
+}
