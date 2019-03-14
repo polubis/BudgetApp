@@ -8,33 +8,33 @@
   }
 }
 
-.txt--btn {
+.txt-btn {
   border: none;
   background: none;
 }
 
-.txt--btn--l-font {
+.txt-btn--l-font {
   color: $l-font;
 }
 
-.txt--btn--main-font {
+.txt-btn--main-font {
   color: $main;
 }
 
-.txt--btn-bold {
+.txt-btn--bold {
   font-weight: 600;
 }
 
-.bg--btn {
+.bg-btn {
   border: none;
   padding: 15px;
 }
 
-.bg--btn-main {
+.bg-btn--main {
   background: $main;
   color: $white;
 }
 
-.bg--btn-rounded {
+.bg-btn--rounded {
   border-radius: 1000px;
 }

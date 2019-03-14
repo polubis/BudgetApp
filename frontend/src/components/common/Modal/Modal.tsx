@@ -1,38 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './Modal.scss';
 
 interface ModalProps {
   close: any;
+  children: React.ReactElement;
 }
 
-class Modal extends React.PureComponent<ModalProps> {
+const Modal: React.SFC<ModalProps> = ({close, children}) => {
+  useEffect(() => {
 
-  componentDidMount(){
-    document.addEventListener("keydown", this.onEscape, false);
-  }
+    const onEsape = (e: KeyboardEvent) => {
+      if (e.keyCode === 27) close();
+    };
 
-  onEscape = (e: KeyboardEvent) => {
-    if(e.keyCode === 27) {
-      this.props.close();
+    document.addEventListener("keydown", onEsape, false);
+
+    return () => {
+      document.removeEventListener("keydown", onEsape, false);
     }
-  }
+  }, []);
 
-  componentWillUnmount(){
-    document.removeEventListener("keydown", this.onEscape, false);
-  }
+  return (
+    <>
+      <div onClick={close} className='backdrop' />
 
-  render() {
-    return (
-      <>
-        <div className='backdrop' />
-
-        <div className='modal'>
-        
-        </div>
-      </>
-    );
-  }
+      <div className='modal centered'>
+        {children}
+      </div>
+    </>
+  );
 }
 
 export default Modal;

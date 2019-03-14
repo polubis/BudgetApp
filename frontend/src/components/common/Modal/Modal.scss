@@ -1,0 +1,16 @@
+@import '../../../theme.scss';
+
+.modal {
+  position: fixed;
+  background: $white;
+  box-shadow: $shadow;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: $backdrop;
+  width: 100%;
+  height: 100%;
+}

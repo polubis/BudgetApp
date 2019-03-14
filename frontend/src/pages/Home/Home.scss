@@ -25,24 +25,6 @@
   main {
     min-height: 100%;
     background-size: contain;
-    position: relative;
-    &::before {
-      content: '';
-      position: absolute;
-      height: 2px;
-      background: $main;
-      width: calc(100vw - 4px);
-      top: -1px;
-      animation: 1.5s animate-line linear forwards;
-      @keyframes animate-line {
-        from {
-          left: -100vw;
-        }
-        to {
-          left: 0;
-        }
-      }
-    }
   }
 }
 
@@ -51,7 +33,7 @@
   padding: 15px 0;
   .page__nav__wrap {
     margin-left: auto;
-    .txt--btn--l-font {
+    .txt-btn--l-font {
       margin-right: 50px;
     }
   }
@@ -82,7 +64,7 @@
   width: 200px;
 }
 
-@media(min-width: 1260px) {
+@media(min-width: 1360px) {
   .page__nav {
     width: 1280px;
     margin: 0 auto;

@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Loadable from 'react-loadable';
-
-export const loading = () => {
-  return <div>Loading...</div>;
-}
+import Spinner from './components/ui/Spinner/Spinner';
 
 const Home = Loadable({
-  loader: () => import('./pages/Home/Home'), loading
+  loader: () => import('./pages/Home/Home'),
+  loading: Spinner
 });
 
 class App extends Component {
@@ -16,12 +14,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-
           <Route exact path='/' component={Home} />
-
-
         </Switch>
-        
       </BrowserRouter>
     );
   }

@@ -1,0 +1,32 @@
+@import '../../../theme.scss';
+
+@keyframes animate-spinner {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  position: absolute;
+  .spinner__circle {
+    border: 1px solid transparent;
+    width: 100%;
+    border-radius: 50%;
+    height: 100%;
+    animation: .8s animate-spinner ease-in-out infinite;
+  }
+}
+
+.spinner--main {
+  .spinner__circle {
+    border-top-color: $main;
+  }
+}
+
+.spinner--medium {
+  width: 40px;
+  height: 40px;
+}
