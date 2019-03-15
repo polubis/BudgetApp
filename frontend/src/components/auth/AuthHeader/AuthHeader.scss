@@ -1,0 +1,9 @@
+@import '../../../theme.scss';
+
+.auth-header {
+  font-weight: 400;
+  margin-bottom: 50px;
+  .auth-header__sub-title {
+    font-size: 16px;
+  }
+}

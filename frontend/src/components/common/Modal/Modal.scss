@@ -1,5 +1,14 @@
 @import '../../../theme.scss';
 
+@keyframes animate-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  } 
+}
+
 .modal {
   position: fixed;
   background: $white;
@@ -8,6 +17,8 @@
 
 .backdrop {
   position: fixed;
+  will-change: opacity;
+  animation: .25s animate-opacity cubic-bezier(.4,0,.2,1) forwards;
   top: 0;
   left: 0;
   background: $backdrop;

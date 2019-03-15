@@ -10,21 +10,21 @@ import Spinner from '../../components/ui/Spinner/Spinner';
 
 import './Home.scss';
 
-const Login = Loadable({
-  loader: () => import('../../containers/Login/Login'),
+const Auth = Loadable({
+  loader: () => import('../../containers/Auth/Auth'),
   loading: Spinner
 });
 
-const initialState = { wantLogIn: false };
+const initialState = { wantAuth: true };
 
 type State = Readonly<typeof initialState>;
 
 class Home extends React.Component<State, any> {
   readonly state: State = initialState;
 
-  private togleLogIn = (): void => {
-    Login.preload();
-    this.setState({wantLogIn: !this.state.wantLogIn});
+  _togleAuth = (): void => {
+    Auth.preload();
+    this.setState({wantAuth: !this.state.wantAuth});
   }
 
   render() {
@@ -34,9 +34,9 @@ class Home extends React.Component<State, any> {
         <div className="top-bg-wrap" />
         <div className="bot-bg-wrap" />
 
-        {this.state.wantLogIn && 
-          <Login 
-            close={this.togleLogIn}
+        {this.state.wantAuth && 
+          <Auth 
+            close={this._togleAuth}
           />
         }
 
@@ -48,7 +48,7 @@ class Home extends React.Component<State, any> {
 
             <div className='page__nav__wrap row-c'>
               <Button action={() => {}} title='Register' classes='txt-btn txt-btn--l-font txt-btn--bold' />
-              <Button action={this.togleLogIn} title='Sign In' classes='txt-btn txt-btn--main-font txt-btn--bold' />
+              <Button action={this._togleAuth} title='Sign In' classes='txt-btn txt-btn--main-font txt-btn--bold' />
             </div>
           </nav>
         </header>

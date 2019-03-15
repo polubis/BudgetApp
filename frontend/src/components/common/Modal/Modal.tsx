@@ -4,10 +4,11 @@ import './Modal.scss';
 
 interface ModalProps {
   close: any;
-  children: React.ReactElement;
+  children: React.ReactElement | React.ReactElement[];
+  id?: string;
 }
 
-const Modal: React.SFC<ModalProps> = ({close, children}) => {
+const Modal: React.SFC<ModalProps> = ({close, children, id}) => {
   useEffect(() => {
 
     const onEsape = (e: KeyboardEvent) => {
@@ -24,8 +25,7 @@ const Modal: React.SFC<ModalProps> = ({close, children}) => {
   return (
     <>
       <div onClick={close} className='backdrop' />
-
-      <div className='modal centered'>
+      <div id={id} className='modal centered'>
         {children}
       </div>
     </>

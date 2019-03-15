@@ -1,0 +1,24 @@
+#auth {
+  display: grid;
+  width: 1000px;
+  grid-template-columns: 400px 1fr;
+
+  #auth__login-wrap, #auth__register-wrap {
+    position: relative;
+    .arrow-rectangle {
+      position: absolute;
+      transform: rotate(45deg) translateY(-50%);
+      width: 30px;
+      height: 30px;
+      top: 50%;
+    }
+  }
+
+  #auth__login-wrap {
+    padding: 40px 50px;
+  }
+  
+  #auth__register-wrap {
+    padding: 40px 50px 40px 70px;
+  }
+}
