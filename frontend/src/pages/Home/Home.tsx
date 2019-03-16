@@ -15,28 +15,28 @@ const Auth = Loadable({
   loading: Spinner
 });
 
-const initialState = { wantAuth: true };
-
-type State = Readonly<typeof initialState>;
+type State = Readonly<{ currentOpenedForm: string }>;
 
 class Home extends React.Component<State, any> {
-  readonly state: State = initialState;
+  readonly state: State = { currentOpenedForm: '' };
 
-  _togleAuth = (): void => {
+  _togleAuth = (formName: string): void => {
     Auth.preload();
-    this.setState({wantAuth: !this.state.wantAuth});
+    this.setState({currentOpenedForm: formName});
   }
 
   render() {
+    const { currentOpenedForm } = this.state;
     return (
       <div className='page' id='homepage'>
 
         <div className="top-bg-wrap" />
         <div className="bot-bg-wrap" />
 
-        {this.state.wantAuth && 
+        {currentOpenedForm && 
           <Auth 
-            close={this._togleAuth}
+            whichForm={currentOpenedForm}
+            close={() => this._togleAuth('')}
           />
         }
 
@@ -47,8 +47,8 @@ class Home extends React.Component<State, any> {
             </Link>
 
             <div className='page__nav__wrap row-c'>
-              <Button action={() => {}} title='Register' classes='txt-btn txt-btn--l-font txt-btn--bold' />
-              <Button action={this._togleAuth} title='Sign In' classes='txt-btn txt-btn--main-font txt-btn--bold' />
+              <Button action={() => this._togleAuth('register')} title='Register' classes='txt-btn txt-btn--l-font txt-btn--bold' />
+              <Button action={() => this._togleAuth('login')} title='Sign In' classes='txt-btn txt-btn--main-font txt-btn--bold' />
             </div>
           </nav>
         </header>

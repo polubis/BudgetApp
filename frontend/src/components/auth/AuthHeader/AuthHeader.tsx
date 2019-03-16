@@ -6,14 +6,15 @@ type AuthHeaderProps = {
   message: string;
   logInClass?: string;
   registerClass?: string;
+  action(): void;
 }
 
-const AuthHeader: React.SFC<AuthHeaderProps> = ({message, logInClass, registerClass}) => (
+const AuthHeader: React.SFC<AuthHeaderProps> = ({message, logInClass, registerClass, action}) => (
   <h2 className='auth-header l-font-color'>
-    <div>
-      <span className={logInClass}>Login</span>
+    <div onClick={action}>
+      <span className={`${logInClass} click`}>Login</span>
       <span> / </span>
-      <span className={registerClass}>Register </span>
+      <span className={`${registerClass} click`}>Register </span>
     </div>
     <span className='auth-header__sub-title'>
       {message}

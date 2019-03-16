@@ -1,47 +1,63 @@
 import React from 'react';
 
 import Modal from '../../components/common/Modal/Modal';
-import Login from './Login/Login';
 import AuthHeader from '../../components/auth/AuthHeader/AuthHeader';
+import Commercial from '../../components/auth/Commercial/Commercial';
+
+import LaptoptImg from './assets/laptop.jpg';
+import CalculatorImg from './assets/calculator.jpg';
 
 import './Auth.scss';
 
 type AuthProps = {
-  close(): void
+  close(): void;
+  whichForm: string;
 }
 
-type AuthState = {
+type State = {
   currentForm: string;
 }
 
-const initialState: AuthState = { currentForm: 'login' };
+class Auth extends React.Component<AuthProps, State> {
+  readonly state: State = { currentForm: this.props.whichForm };
 
-type State = Readonly<typeof initialState>;
-
-class Auth extends React.Component<AuthProps, any> {
-  readonly state: State = initialState;
+  changeCurrentForm = (formName: string): void => this.setState({currentForm: formName});
 
   render() {
+    const { currentForm } = this.state;
     return (
       <Modal id='auth' close={this.props.close}>
 
         <div id='auth__login-wrap'>
-          <AuthHeader 
-            message='type your credentials'
-            logInClass='second-color'
-          />
-
-          <div className='arrow-rectangle' />
-
+          {currentForm === 'register' ? 
+            <Commercial 
+              commercialKey='login'
+              imagePath={CalculatorImg}
+            />  : 
+            <>
+              <AuthHeader 
+                action={() => this.changeCurrentForm('register')}
+                message='type your credentials'
+                logInClass='second-color'
+              />
+            </>
+          }
         </div>
 
-        <div id='auth__register-wrap'>
-          <AuthHeader 
-            message='populate account informations'
-            registerClass='second-color'
-          />
-
-          <div className='arrow-rectangle' />
+        <div id='auth__register-wrap'>  
+          {currentForm === 'login' ? 
+            <Commercial 
+              commercialKey='register'
+              imagePath={LaptoptImg}
+            /> :
+            <>
+              <AuthHeader 
+                action={() => this.changeCurrentForm('login')}
+                message='populate account informations'
+                registerClass='second-color'
+              />
+            </>
+          }
         </div>
 
       </Modal>

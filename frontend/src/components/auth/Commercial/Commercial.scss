@@ -1,0 +1,31 @@
+@import '../../../theme.scss';
+.commercial {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: -100px;
+  z-index: 1;
+  .arrow-rectangle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: $white;
+    transform: rotate(45deg) translateY(-50%);
+    top: 50%;
+    
+  }
+  .arrow-rectangle--login {
+    right: -8px;
+  }
+  .arrow-rectangle--register {
+    left: -30px;
+  }
+  .commercial__content {
+    background: $commercial-backdrop;
+    width: 100%;
+    height: 100%;
+  }
+}
