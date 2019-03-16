@@ -5,7 +5,7 @@ import AuthHeader from '../../components/auth/AuthHeader/AuthHeader';
 import Commercial from '../../components/auth/Commercial/Commercial';
 
 import LaptoptImg from './assets/laptop.jpg';
-import CalculatorImg from './assets/calculator.jpg';
+import LaptopStatsImg from './assets/laptop-stats.jpg';
 
 import './Auth.scss';
 
@@ -32,7 +32,7 @@ class Auth extends React.Component<AuthProps, State> {
           {currentForm === 'register' ? 
             <Commercial 
               commercialKey='login'
-              imagePath={CalculatorImg}
+              imagePath={LaptopStatsImg}
             />  : 
             <>
               <AuthHeader 
