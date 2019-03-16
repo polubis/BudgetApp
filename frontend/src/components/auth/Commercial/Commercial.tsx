@@ -17,11 +17,11 @@ type CommercialSettingsFor = {
 const commercialSettingsFor: CommercialSettingsFor = {
   login: {
     arrowClass: 'arrow-rectangle--login',
-    component: () => <LoginCommercial />
+    component: () => <AppPolicy />
   },
   register: {
     arrowClass: 'arrow-rectangle--register',
-    component: () => <RegisterCommercial />
+    component: () => <AppOptionsCommercial />
   } 
 }
 
@@ -34,8 +34,8 @@ const Commercial: React.SFC<CommercialProps> = ({commercialKey, imagePath}) => (
   </div>
 );
 
-const RegisterCommercial = () => (
-  <div className='content__register'>
+const AppOptionsCommercial = () => (
+  <div className='content__app-options'>
     <h1>Manage your finances and increase your savings</h1>
     <p>- log in and populate basic informations</p>
     <p>- populate your salary and specify money limit</p>
@@ -45,8 +45,8 @@ const RegisterCommercial = () => (
   </div>
 );
 
-const LoginCommercial = () => (
-  <div className='content__login'>
+const AppPolicy = () => (
+  <div className='content__policy'>
     <h2>Policy informations</h2>
     <article>
       By clicking submit button you accept the 
