@@ -8,6 +8,7 @@ import './ValidationErrors.scss';
 
 type Props = {
   validationResult: ValidationResult;
+  closeValidationErrors: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 const getClassByErrorStatus = (isError: boolean | null) => isError ? 'message-error' : 'message-ok';
@@ -15,7 +16,7 @@ const getClassByErrorStatus = (isError: boolean | null) => isError ? 'message-er
 const getCompletedCount = (keys: string[], validationResult: ValidationResult): number =>
   keys.filter(key => !validationResult[key].isError).length;
 
-const ValidationErrors = ({validationResult}: Props) => {
+const ValidationErrors = ({validationResult, closeValidationErrors}: Props) => {
   const keys: string[] = Object.keys(validationResult);
 
   return (
@@ -23,7 +24,7 @@ const ValidationErrors = ({validationResult}: Props) => {
 
     <h3 className='validation-errors__header row-b-c'>
       <span className='validation-errors__text'>{getCompletedCount(keys, validationResult)}/{keys.length} completed</span>
-      <MaterialIcon className='click' icon='close' />
+      <MaterialIcon onClick={closeValidationErrors} className='click' icon='close' />
     </h3>
 
     <ul className='validation-errors__list'>

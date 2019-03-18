@@ -37,7 +37,7 @@
   }
 
   .validation-errors__text {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 300;
     color: $l-font;
     line-height: 20px;
@@ -49,7 +49,7 @@
   }
 
   .validation-errors__list {
-    margin: 20px 10px 20px 15px;
+    margin: 10px 10px 10px 15px;
 
     li:not(:last-of-type) {
       margin-bottom: 14px;

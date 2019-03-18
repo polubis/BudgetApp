@@ -59,8 +59,9 @@ class FormGroup extends Component<Props & FormAppearanceSetting, any> {
               </div>
             }
 
-            {(errorsOccured && currentFocusedInput) && 
+            {(errorsOccured && currentFocusedInput === id) && 
               <ValidationErrors 
+                closeValidationErrors={() => changeFocusedInput('')}
                 validationResult={validationResult}
               />
             }
