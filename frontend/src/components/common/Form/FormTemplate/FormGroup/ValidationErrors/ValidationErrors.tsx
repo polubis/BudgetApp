@@ -12,21 +12,23 @@ type Props = {
 
 const getClassByErrorStatus = (isError: boolean | null) => isError ? 'message-error' : 'message-ok';
 
-const getCompletedCount = () => {} // dokonczyc liczbe errorow do uzupelnienia
+const getCompletedCount = (keys: string[], validationResult: ValidationResult): number =>
+  keys.filter(key => !validationResult[key].isError).length;
 
 const ValidationErrors = ({validationResult}: Props) => {
+  const keys: string[] = Object.keys(validationResult);
 
   return (
     <section className='validation-errors'>
 
     <h3 className='validation-errors__header row-b-c'>
-      <span className='validation-errors__text'>2/4 completed</span>
+      <span className='validation-errors__text'>{getCompletedCount(keys, validationResult)}/{keys.length} completed</span>
       <MaterialIcon className='click' icon='close' />
     </h3>
 
     <ul className='validation-errors__list'>
-      {Object.keys(validationResult).map(key => (
-        <li className={`validation-errors__text row-b-c ${getClassByErrorStatus(validationResult[key].isError)}`} key={key}>
+      {keys.map(key => (
+        <li key={key} className={`validation-errors__text row-b-c ${getClassByErrorStatus(validationResult[key].isError)}`}>
           <span>
             {validationResult[key].errorContent}
           </span>
