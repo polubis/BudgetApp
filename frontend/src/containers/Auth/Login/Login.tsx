@@ -3,6 +3,8 @@ import React from 'react';
 import Button from '../../../components/ui/Button/Button';
 import Form, { FormSettings } from '../../../components/common/Form/Form';
 
+import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
+
 import './Login.scss';
 
 const LoginFormSettings: FormSettings = {
@@ -25,11 +27,11 @@ const Login = () => (
       actionAfterSubmit={values => console.log(values)}
     />
 
-    <Button 
-      id='fb-btn'
-      action={() => {}}
-      classes='txt-btn txt-btn--main-font'
-      title='Log in via Facebook'
+    <FacebookLogin 
+      appId="2181257188618368"
+      cssClass='facebook-btn click'
+      fields="name,email,picture"
+      callback={(data: ReactFacebookLoginInfo) => console.log(data)}
     />
 
     <Button 
