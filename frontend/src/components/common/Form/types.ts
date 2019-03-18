@@ -41,4 +41,5 @@ export type ValidationResult = {
 export type TemplateViewProps = {
   btnTitle: string;
   btnClasses: string;
+  formClass?: string;
 }

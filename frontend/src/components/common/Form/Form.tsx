@@ -24,7 +24,7 @@ export const { Provider, Consumer } = createContext({
   changeFocusedInput: (key: string) => {}
 });
 
-const Form = ({settings, actionAfterSubmit, ...rest}: Props & TemplateViewProps) => (
+export const Form = ({settings, actionAfterSubmit, ...rest}: Props & TemplateViewProps) => (
   <FormManager settings={settings} actionAfterSubmit={actionAfterSubmit}>
 
     {(currentFocusedInput, values, errors, updateValue, handleSubmit, changeFocusedInput) => (

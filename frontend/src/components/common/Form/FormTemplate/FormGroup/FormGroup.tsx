@@ -37,7 +37,7 @@ class FormGroup extends Component<Props & FormAppearanceSetting, any> {
     return (
     <Consumer>
       {({currentFocusedInput, changeFocusedInput}: FormContext) => (
-        <section className='form-group'>
+        <section id={id} className='form-group'>
           <label htmlFor={title} className='form-group__label'>{title}</label>
 
           <div className={`form-group__content ${this.selectGroupClassByErrorsOccured()}`}>
@@ -71,8 +71,6 @@ class FormGroup extends Component<Props & FormAppearanceSetting, any> {
         </section>
       )}
     </Consumer>
-
-    
     );
   }
 }

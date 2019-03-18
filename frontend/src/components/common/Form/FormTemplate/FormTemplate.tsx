@@ -9,6 +9,7 @@ import { FormSettings } from '../Form';
 import './FormTemplate.scss';
 
 type Props = {
+  formClass?: string;
   values: FormValues;
   errors: FormErrors;
   settings: FormSettings;
@@ -17,22 +18,24 @@ type Props = {
 }
 
 const FormTemplate = ({values, errors, updateValue, settings, 
-  onSubmit, btnTitle, btnClasses}: Props & TemplateViewProps) => {
+  onSubmit, btnTitle, btnClasses, formClass}: Props & TemplateViewProps) => {
 
   return (
-    <form onSubmit={onSubmit}>
+    <form className={formClass} onSubmit={onSubmit}>
 
-      {Object.keys(settings).map(key => (
-        <FormGroup 
-          {...settings[key].appearance}
-          key={key}
-          id={key}
-          value={values[key]}
-          errorsOccured={errors[key].errorsOccured}
-          validationResult={errors[key].validationResult}
-          updateValue={e => updateValue(key, e)}
-        />
-      ))}
+      <div className='form-content'>
+        {Object.keys(settings).map(key => (
+          <FormGroup 
+            {...settings[key].appearance}
+            key={key}
+            id={key}
+            value={values[key]}
+            errorsOccured={errors[key].errorsOccured}
+            validationResult={errors[key].validationResult}
+            updateValue={e => updateValue(key, e)}
+          />
+        ))}
+      </div>
       
       <Button 
         classes={btnClasses}

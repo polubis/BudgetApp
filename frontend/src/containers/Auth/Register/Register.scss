@@ -1,0 +1,15 @@
+.register-form {
+  height: 100%;
+  .form-content {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    .form-group {
+      width: 46%;
+    }
+  }
+  .btn {
+    width: 46%;
+    margin: auto 0 0 0;
+  }
+}
