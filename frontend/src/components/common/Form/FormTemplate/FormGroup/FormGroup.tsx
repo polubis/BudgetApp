@@ -29,8 +29,6 @@ class FormGroup extends Component<Props & FormAppearanceSetting, any> {
       : errorsOccured ? 'form-group__content--error' : 'form-group__content--ok';
   }
 
-
-
   render() {
     const { value, errorsOccured, validationResult, updateValue, icon, title, placeholder } = this.props;
     

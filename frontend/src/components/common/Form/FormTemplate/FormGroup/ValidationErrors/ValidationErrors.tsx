@@ -10,8 +10,14 @@ type Props = {
   validationResult: ValidationResult;
 }
 
-const ValidationErrors = ({validationResult}: Props) => (
-  <section className='validation-errors'>
+const getClassByErrorStatus = (isError: boolean | null) => isError ? 'message-error' : 'message-ok';
+
+const getCompletedCount = () => {} // dokonczyc liczbe errorow do uzupelnienia
+
+const ValidationErrors = ({validationResult}: Props) => {
+
+  return (
+    <section className='validation-errors'>
 
     <h3 className='validation-errors__header row-b-c'>
       <span className='validation-errors__text'>2/4 completed</span>
@@ -20,7 +26,7 @@ const ValidationErrors = ({validationResult}: Props) => (
 
     <ul className='validation-errors__list'>
       {Object.keys(validationResult).map(key => (
-        <li className='validation-errors__text row-b-c' key={key}>
+        <li className={`validation-errors__text row-b-c ${getClassByErrorStatus(validationResult[key].isError)}`} key={key}>
           <span>
             {validationResult[key].errorContent}
           </span>
@@ -32,7 +38,8 @@ const ValidationErrors = ({validationResult}: Props) => (
       ))}
     </ul>
 
-  </section>
-);
+    </section>
+  );
+}
 
 export default ValidationErrors;

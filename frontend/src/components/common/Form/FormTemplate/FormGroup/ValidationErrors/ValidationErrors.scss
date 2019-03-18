@@ -25,6 +25,18 @@
     color: $l-font;
   }
 
+  .message-error {
+    span, i {
+      color: $error;
+    }
+  }
+
+  .message-ok {
+    span, i {
+      color: $ok;
+    }
+  }
+
   .validation-errors__text {
     font-size: 13px;
     font-weight: 300;
