@@ -3,9 +3,14 @@
 .btn {
   cursor: pointer;
   letter-spacing: 1.20px;
+  font-family: inherit;
   &:focus {
     outline: none;
   }
+}
+
+.btn--medium {
+  padding: 12px;
 }
 
 .txt-btn {
@@ -27,7 +32,6 @@
 
 .bg-btn {
   border: none;
-  padding: 15px;
 }
 
 .bg-btn--main {

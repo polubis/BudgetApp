@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { FormSettings } from '../../../components/common/Form/types';
-
-import Form from '../../../components/common/Form/Form';
+import Button from '../../../components/ui/Button/Button';
+import Form, { FormSettings } from '../../../components/common/Form/Form';
 
 import './Login.scss';
 
@@ -18,10 +17,30 @@ const LoginFormSettings: FormSettings = {
 }
 
 const Login = () => (
-  <Form 
-    settings={LoginFormSettings}
-    actionAfterSubmit={values => console.log(values)}
-  />
+  <>
+    <Form 
+      btnTitle='Log in'
+      btnClasses='bg-btn bg-btn--main btn--medium login-btn'
+      settings={LoginFormSettings}
+      actionAfterSubmit={values => console.log(values)}
+    />
+
+    <Button 
+      id='fb-btn'
+      action={() => {}}
+      classes='txt-btn txt-btn--main-font'
+      title='Log in via Facebook'
+    />
+
+    <Button 
+      id='forgot-pass-btn'
+      size='14'
+      action={() => {}}
+      classes='txt-btn txt-btn--l-font'
+      title='forgot password?'
+    />
+  </>
+  
 );
 
 export default Login;

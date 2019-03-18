@@ -1,7 +1,3 @@
-export type FormSettings = {
-  [key: string] : FormSetting;
-}
-
 export type FormSetting = {
   appearance: FormAppearanceSetting;
   logic: FormLogicSetting;
@@ -40,4 +36,9 @@ export type ValidationResult = {
     errorContent: string;
     isError: boolean | null;
   }
+}
+
+export type TemplateViewProps = {
+  btnTitle: string;
+  btnClasses: string;
 }

@@ -1,4 +1,5 @@
-import { FormSettings, FormValues, FormErrors, Validators, FormError, ValidationResult } from './types';
+import { FormValues, FormErrors, Validators, FormError, ValidationResult } from './types';
+import { FormSettings } from './Form';
 import { resolveValidation } from './validators';
 
 export const initializeState = (formSettings: FormSettings): {values: FormValues, errors: FormErrors} => {

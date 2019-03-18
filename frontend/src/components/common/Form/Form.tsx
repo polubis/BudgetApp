@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { FormSettings, FormValues} from './types';
+import { FormSetting, FormValues, TemplateViewProps } from './types';
 
 import FormManager from './FormManager/FormManager';
 import FormTemplate from './FormTemplate/FormTemplate';
@@ -10,10 +10,16 @@ type Props = {
   actionAfterSubmit: (values: FormValues) => void;
 }
 
-const Form: React.SFC<Props> = ({settings, actionAfterSubmit}) => (
+export type FormSettings = {
+  [key: string] : FormSetting;
+}
+
+const Form = ({settings, actionAfterSubmit, ...rest}: Props & TemplateViewProps) => (
   <FormManager settings={settings} actionAfterSubmit={actionAfterSubmit}>
+
     {(values, errors, updateValue, handleSubmit) => (
       <FormTemplate 
+        {...rest}
         values={values}
         errors={errors}
         settings={settings}
@@ -21,6 +27,7 @@ const Form: React.SFC<Props> = ({settings, actionAfterSubmit}) => (
         updateValue={updateValue}
       />
     )}
+
   </FormManager>
 );
 
