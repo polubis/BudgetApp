@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import Loadable from 'react-loadable';
-import Spinner from './components/ui/Spinner/Spinner';
-
-const Home = Loadable({
-  loader: () => import('./pages/Home/Home'),
-  loading: Spinner
-});
+import Home from './pages/Home/Home';
 
 class App extends Component {
   render() {

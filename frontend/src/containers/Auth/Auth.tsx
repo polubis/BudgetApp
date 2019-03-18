@@ -3,11 +3,24 @@ import React from 'react';
 import Modal from '../../components/common/Modal/Modal';
 import AuthHeader from '../../components/auth/AuthHeader/AuthHeader';
 import Commercial from '../../components/auth/Commercial/Commercial';
-import Login from './Login/Login';
-import Register from './Register/Register';
+import Spinner from '../../components/ui/Spinner/Spinner';
 
 import LaptoptImg from './assets/laptop.jpg';
 import LaptopStatsImg from './assets/laptop-stats.jpg';
+
+import Loadable from 'react-loadable';
+
+const Login = Loadable({
+  loader: () => import('./Login/Login'),
+  loading: Spinner,
+  delay: 2000
+});
+
+const Register = Loadable({
+  loader: () => import('./Register/Register'),
+  loading: Spinner,
+  delay: 2000
+});
 
 import './Auth.scss';
 

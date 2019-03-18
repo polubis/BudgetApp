@@ -3,25 +3,18 @@ import React from 'react';
 import { LogoWithName } from '../../components/ui/Logo/Logo';
 import { Link } from 'react-router-dom';
 
-import Loadable from 'react-loadable';
 import Button from '../../components/ui/Button/Button';
 import Guy from './assets/Guy.png';
-import Spinner from '../../components/ui/Spinner/Spinner';
+import Auth from '../../containers/Auth/Auth';
 
 import './Home.scss';
-
-const Auth = Loadable({
-  loader: () => import('../../containers/Auth/Auth'),
-  loading: Spinner
-});
 
 type State = Readonly<{ currentOpenedForm: string }>;
 
 class Home extends React.Component<State, any> {
-  readonly state: State = { currentOpenedForm: 'register' };
+  readonly state: State = { currentOpenedForm: '' };
 
   _togleAuth = (formName: string): void => {
-    Auth.preload();
     this.setState({currentOpenedForm: formName});
   }
 
