@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext } from 'react'
 
 import { FormSetting, FormValues, TemplateViewProps } from './types';
 
@@ -14,10 +14,24 @@ export type FormSettings = {
   [key: string] : FormSetting;
 }
 
+export type FormContext = {
+  currentFocusedInput: string;
+  changeFocusedInput: (key: string) => void;
+}
+
+export const { Provider, Consumer } = createContext({
+  currentFocusedInput: '',
+  changeFocusedInput: (key: string) => {}
+});
+
 const Form = ({settings, actionAfterSubmit, ...rest}: Props & TemplateViewProps) => (
   <FormManager settings={settings} actionAfterSubmit={actionAfterSubmit}>
 
-    {(values, errors, updateValue, handleSubmit) => (
+    {(currentFocusedInput, values, errors, updateValue, handleSubmit, changeFocusedInput) => (
+    <Provider value={{
+      currentFocusedInput: currentFocusedInput,
+      changeFocusedInput: changeFocusedInput
+    }}>
       <FormTemplate 
         {...rest}
         values={values}
@@ -26,6 +40,7 @@ const Form = ({settings, actionAfterSubmit, ...rest}: Props & TemplateViewProps)
         onSubmit={handleSubmit}
         updateValue={updateValue}
       />
+    </Provider>
     )}
 
   </FormManager>

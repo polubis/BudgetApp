@@ -16,7 +16,8 @@ type Props = {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-const FormTemplate = ({values, errors, updateValue, settings, onSubmit, btnTitle, btnClasses}: Props & TemplateViewProps) => {
+const FormTemplate = ({values, errors, updateValue, settings, 
+  onSubmit, btnTitle, btnClasses}: Props & TemplateViewProps) => {
 
   return (
     <form onSubmit={onSubmit}>
@@ -25,6 +26,7 @@ const FormTemplate = ({values, errors, updateValue, settings, onSubmit, btnTitle
         <FormGroup 
           {...settings[key].appearance}
           key={key}
+          id={key}
           value={values[key]}
           errorsOccured={errors[key].errorsOccured}
           validationResult={errors[key].validationResult}

@@ -4,11 +4,13 @@ import MaterialIcon from '@material/react-material-icon';
 import ValidationErrors from './ValidationErrors/ValidationErrors';
 
 import { FormAppearanceSetting, ValidationResult } from '../../types';
+import { Consumer, FormContext } from '../../Form';
 
 import './FormGroup.scss';
 
 type Props = {
   updateValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  id: string;
   value: any;
   errorsOccured?: boolean | null;
   validationResult: ValidationResult;
@@ -30,39 +32,46 @@ class FormGroup extends Component<Props & FormAppearanceSetting, any> {
   }
 
   render() {
-    const { value, errorsOccured, validationResult, updateValue, icon, title, placeholder } = this.props;
+    const { id, value, errorsOccured, validationResult, updateValue, icon, title, placeholder } = this.props;
     
     return (
-    <section className='form-group'>
+    <Consumer>
+      {({currentFocusedInput, changeFocusedInput}: FormContext) => (
+        <section className='form-group'>
+          <label htmlFor={title} className='form-group__label'>{title}</label>
 
-      <label htmlFor={title} className='form-group__label'>{title}</label>
+          <div className={`form-group__content ${this.selectGroupClassByErrorsOccured()}`}>
+            <input 
+              autoComplete='off'
+              id={title}
+              value={value}
+              className='content__item'
+              onChange={updateValue}
+              onFocus={() => changeFocusedInput(id)}
+              onBlur={() => changeFocusedInput('')}
+              type='text' 
+              placeholder={placeholder || 'type your ' + title + '...'} 
+            />
 
-      <div className={`form-group__content ${this.selectGroupClassByErrorsOccured()}`}>
-        <input 
-          autoComplete='off'
-          id={title}
-          value={value || ''}
-          className='content__item'
-          onChange={updateValue}
-          type='text' 
-          placeholder={placeholder || 'type your ' + title + '...'} 
-        />
+            {icon && 
+              <div className='content__rect row-c-c'>
+                <MaterialIcon icon={icon} />
+              </div>
+            }
 
-        {icon && 
-          <div className='content__rect row-c-c'>
-            <MaterialIcon icon={icon} />
+            {(errorsOccured && currentFocusedInput) && 
+              <ValidationErrors 
+                validationResult={validationResult}
+              />
+            }
+
           </div>
-        }
 
-        {errorsOccured && 
-          <ValidationErrors 
-            validationResult={validationResult}
-          />
-        }
+        </section>
+      )}
+    </Consumer>
 
-      </div>
-
-      </section>
+    
     );
   }
 }
