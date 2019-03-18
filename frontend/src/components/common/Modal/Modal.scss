@@ -18,7 +18,7 @@
 .backdrop {
   position: fixed;
   will-change: opacity;
-  animation: .25s animate-opacity cubic-bezier(.4,0,.2,1) forwards;
+  animation: .25s animate-opacity $transition forwards;
   top: 0;
   left: 0;
   background: $backdrop;

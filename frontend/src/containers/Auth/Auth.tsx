@@ -31,11 +31,7 @@ class Auth extends React.Component<AuthProps, State> {
       <Modal id='auth' close={this.props.close}>
 
         <div id='auth__login-wrap'>
-          {currentForm === 'register' ? 
-            <Commercial 
-              commercialKey='login'
-              imagePath={LaptopStatsImg}
-            />  : 
+          {currentForm === 'login' ? 
             <>
               <AuthHeader 
                 action={() => this.changeCurrentForm('register')}
@@ -43,16 +39,16 @@ class Auth extends React.Component<AuthProps, State> {
                 logInClass='second-color'
               />
               <Login />
-            </>
+            </> :
+            <Commercial 
+              commercialKey='login'
+              imagePath={LaptopStatsImg}
+            />
           }
         </div>
 
         <div id='auth__register-wrap' className='col'>  
-          {currentForm === 'login' ? 
-            <Commercial 
-              commercialKey='register'
-              imagePath={LaptoptImg}
-            /> :
+          {currentForm === 'register' ? 
             <>
               <AuthHeader 
                 action={() => this.changeCurrentForm('login')}
@@ -60,7 +56,11 @@ class Auth extends React.Component<AuthProps, State> {
                 registerClass='second-color'
               />
               <Register />
-            </>
+            </> :
+            <Commercial 
+              commercialKey='register'
+              imagePath={LaptoptImg}
+            />
           }
         </div>
 
