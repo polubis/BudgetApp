@@ -2,12 +2,12 @@ import React from 'react';
 
 import './Button.scss';
 
-interface ButtonProps {
+export interface ButtonProps {
   id?: string;
   classes: string;
   title: string;
   size?: string; 
-  action: any;
+  action(params: any): any;
 };
 
 const Button: React.SFC<ButtonProps> = ({id, classes, title, size, action}) => (

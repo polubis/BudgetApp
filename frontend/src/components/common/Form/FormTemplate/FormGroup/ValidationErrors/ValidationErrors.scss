@@ -1,0 +1,51 @@
+@import '../../../../../../theme.scss';
+
+.validation-errors {
+  position: absolute;
+  background: $white;
+  box-shadow: $shadow;
+  width: calc(100% + 2px);
+  height: 250px;
+  z-index: 1;
+  top: 39px;
+  left: -1px;
+  animation: .2s validation-in forwards;
+  will-change: transform;
+  @keyframes validation-in {
+    from {
+      transform: translateY(-40px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  i {
+    font-size: 22px;
+    color: $l-font;
+  }
+
+  .validation-errors__text {
+    font-size: 13px;
+    font-weight: 300;
+    color: $l-font;
+    line-height: 20px;
+  }
+
+  .validation-errors__header {
+    padding: 10px 10px 9px 15px;
+    border-bottom: 1px solid $border;
+  }
+
+  .validation-errors__list {
+    margin: 20px 10px 20px 15px;
+
+    li:not(:last-of-type) {
+      margin-bottom: 14px;
+    }
+
+    span {
+      width: calc(100% - 40px);
+    }
+  }
+}

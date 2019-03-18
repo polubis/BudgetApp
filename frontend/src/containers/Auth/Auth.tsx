@@ -3,6 +3,7 @@ import React from 'react';
 import Modal from '../../components/common/Modal/Modal';
 import AuthHeader from '../../components/auth/AuthHeader/AuthHeader';
 import Commercial from '../../components/auth/Commercial/Commercial';
+import Login from './Login/Login';
 
 import LaptoptImg from './assets/laptop.jpg';
 import LaptopStatsImg from './assets/laptop-stats.jpg';
@@ -40,6 +41,8 @@ class Auth extends React.Component<AuthProps, State> {
                 message='type your credentials'
                 logInClass='second-color'
               />
+
+              <Login />
             </>
           }
         </div>
@@ -56,6 +59,7 @@ class Auth extends React.Component<AuthProps, State> {
                 message='populate account informations'
                 registerClass='second-color'
               />
+
             </>
           }
         </div>

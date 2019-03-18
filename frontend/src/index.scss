@@ -39,6 +39,18 @@ code {
   flex-flow: wrap;
 }
 
+.row-c-c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-b-c {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -72,4 +84,9 @@ h2 {
 
 .click {
   cursor: pointer;
+}
+
+ul {
+  margin: 0; padding: 0;
+  list-style: none;
 }

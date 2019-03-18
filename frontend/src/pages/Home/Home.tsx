@@ -18,7 +18,7 @@ const Auth = Loadable({
 type State = Readonly<{ currentOpenedForm: string }>;
 
 class Home extends React.Component<State, any> {
-  readonly state: State = { currentOpenedForm: '' };
+  readonly state: State = { currentOpenedForm: 'login' };
 
   _togleAuth = (formName: string): void => {
     Auth.preload();
