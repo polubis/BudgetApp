@@ -18,6 +18,7 @@
     "redux": "^4.0.1",
     "redux-observable": "^1.0.0",
     "rxjs": "^6.4.0",
+    "typesafe-actions": "^3.2.1",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
@@ -49,5 +50,6 @@
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "typescript": "^3.3.1"
-  }
+  },
+  "typings": "./dist/index.d.ts"
 }

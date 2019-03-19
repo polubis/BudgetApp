@@ -3,31 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import WebFont from 'webfontloader';
 
-import { createEpicMiddleware } from 'redux-observable';
-import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 
-import * as reducers from './reducers';
+import store from './store/index';
 
 import * as serviceWorker from './serviceWorker';
 
 import './index.scss';
-
-const composeEnhancers =
-  typeof window === 'object' &&
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-  (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
-
-const epicMiddleware = createEpicMiddleware();
-
-const rootReducer = combineReducers({...reducers});
-
-const store = createStore(
-  rootReducer, 
-  composeEnhancers(
-    applyMiddleware(epicMiddleware)
-  )
-);
 
 WebFont.load({
   google: {

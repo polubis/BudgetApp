@@ -1,6 +1,11 @@
+import { User } from '../models/User';
 
-const initialState: any = {
-  user: 'piotro'
+type State = {
+  loggedUserData: User | null
+}
+
+const initialState: State = {
+  loggedUserData: null
 };
 
 const actionMap: any = {

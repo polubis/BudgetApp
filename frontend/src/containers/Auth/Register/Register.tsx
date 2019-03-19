@@ -2,6 +2,9 @@ import React from 'react';
 
 import Form, { FormSettings } from '../../../components/common/Form/Form';
 
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+
 import './Register.scss';
 
 const RegisterFormSetting: FormSettings = {
@@ -36,4 +39,10 @@ const Register = () => (
   
 );
 
-export default Register;
+
+
+// const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+//   register: () => dispatch(register())
+// });
+
+export default connect(null, null)(Register);
