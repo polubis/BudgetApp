@@ -1,5 +1,3 @@
-import { ValidationResult } from './types';
-
 type ValidatorsMap = {
   [key: string]: (value: any, valueToCompare?: any) => boolean;
 }

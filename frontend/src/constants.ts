@@ -1,1 +1,1 @@
-export const CREATE_ACCOUNT = '[Auth] CREATE_ACCOUNT';
+export const CREATE_ACCOUNT = 'auth/CREATE_ACCOUNT';

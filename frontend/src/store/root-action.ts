@@ -1,5 +1,5 @@
-import * as AuthActions from '../actions/Auth';
+import * as authActions from '../features/Auth/actions';
 
 export default {
-  auth: AuthActions
+  auth: authActions
 }

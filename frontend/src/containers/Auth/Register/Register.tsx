@@ -1,9 +1,10 @@
 import React from 'react';
+import StoreTypes from 'StoreTypes';
 
 import Form, { FormSettings } from '../../../components/common/Form/Form';
 
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { Dispatch, bindActionCreators } from 'redux';
 
 import './Register.scss';
 
@@ -27,22 +28,21 @@ const RegisterFormSetting: FormSettings = {
 }
 
 const Register = () => (
-  <>
-    <Form 
-      formClass='register-form col'
-      btnTitle='Submit'
-      btnClasses='bg-btn bg-btn--main btn--medium login-btn'
-      settings={RegisterFormSetting}
-      actionAfterSubmit={values => console.log(values)}
-    />
-  </>
-  
+  <Form 
+    formClass='register-form col'
+    btnTitle='Submit'
+    btnClasses='bg-btn bg-btn--main btn--medium login-btn'
+    settings={RegisterFormSetting}
+    actionAfterSubmit={values => console.log(values)}
+  />
 );
 
+const mapStateToProps = (state: StoreTypes.RootState) => ({
 
+});
 
-// const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-//   register: () => dispatch(register())
-// });
+const mapDispatchToProps = (dispatch: Dispatch<StoreTypes.RootAction>) => 
+  bindActionCreators({
+  }, dispatch);
 
-export default connect(null, null)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
