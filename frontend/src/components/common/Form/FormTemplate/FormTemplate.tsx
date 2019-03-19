@@ -10,6 +10,7 @@ import './FormTemplate.scss';
 
 type Props = {
   formClass?: string;
+  isOnSubmit?: boolean;
   values: FormValues;
   errors: FormErrors;
   settings: FormSettings;
@@ -18,7 +19,7 @@ type Props = {
 }
 
 const FormTemplate = ({values, errors, updateValue, settings, 
-  onSubmit, btnTitle, btnClasses, formClass}: Props & TemplateViewProps) => {
+  onSubmit, btnTitle, btnClasses, formClass, isOnSubmit}: Props & TemplateViewProps) => {
 
   return (
     <form className={formClass} onSubmit={onSubmit}>
@@ -38,6 +39,7 @@ const FormTemplate = ({values, errors, updateValue, settings,
       </div>
       
       <Button 
+        showLoader={isOnSubmit}
         classes={btnClasses}
         title={btnTitle}
         action={onSubmit}

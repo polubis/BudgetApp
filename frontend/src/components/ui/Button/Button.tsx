@@ -1,24 +1,35 @@
 import React from 'react';
 
+import Spinner from '../Spinner/Spinner';
+
 import './Button.scss';
 
-export interface ButtonProps {
+export type ButtonProps = {
   id?: string;
+  showLoader?: boolean;
   classes: string;
   title: string;
   size?: string; 
   action(params: any): any;
 };
 
-const Button: React.SFC<ButtonProps> = ({id, classes, title, size, action}) => (
-  <button 
+const Button = ({id, showLoader, classes, title, size, action}: ButtonProps) => (
+  <button
     onClick={action} 
     id={id} 
     title={title} 
-    className={'btn ' + classes}
+    className={`btn ${classes} ${showLoader ? 'btn--loading' : ''}`}
     style={{fontSize: size ? size + 'px' : 'initial'}}>
     
     {title}
+
+    {showLoader && 
+      <Spinner 
+        positionClass='btn--spinner'
+        sizeClass='spinner--small'
+        appearanceClass='spinner--white' 
+      />
+    }
   </button>
 );
 

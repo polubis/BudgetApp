@@ -34,10 +34,7 @@ class FormManager extends React.Component<Props, State> {
 
   state: State = getInitialState(this.props.settings);
 
-  changeFocusedInput = (key: string): void => {
-    console.log(key);
-    this.setState({currentFocusedInput: key});
-  }
+  changeFocusedInput = (key: string): void => this.setState({currentFocusedInput: key});
 
   updateValue = (key: string, e: React.ChangeEvent<HTMLInputElement>): void => {
     const { logic, appearance } = this.props.settings[key];

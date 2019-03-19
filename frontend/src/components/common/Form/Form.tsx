@@ -8,6 +8,7 @@ import FormTemplate from './FormTemplate/FormTemplate';
 type Props = {
   settings: FormSettings;
   actionAfterSubmit: (values: FormValues) => void;
+  isOnSubmit?: boolean;
 }
 
 export type FormSettings = {
@@ -24,7 +25,7 @@ export const { Provider, Consumer } = createContext({
   changeFocusedInput: (key: string) => {}
 });
 
-export const Form = ({settings, actionAfterSubmit, ...rest}: Props & TemplateViewProps) => (
+export const Form = ({settings, actionAfterSubmit, isOnSubmit, ...rest}: Props & TemplateViewProps) => (
   <FormManager settings={settings} actionAfterSubmit={actionAfterSubmit}>
 
     {(currentFocusedInput, values, errors, updateValue, handleSubmit, changeFocusedInput) => (
@@ -39,6 +40,7 @@ export const Form = ({settings, actionAfterSubmit, ...rest}: Props & TemplateVie
         settings={settings}
         onSubmit={handleSubmit}
         updateValue={updateValue}
+        isOnSubmit={isOnSubmit}
       />
     </Provider>
     )}

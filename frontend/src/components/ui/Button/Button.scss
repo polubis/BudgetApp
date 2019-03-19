@@ -4,9 +4,15 @@
   cursor: pointer;
   letter-spacing: 1.20px;
   font-family: inherit;
+  position: relative;
+  z-index: 1;
   &:focus {
     outline: none;
   }
+}
+
+.btn--loading {
+  opacity: .6;
 }
 
 .btn--medium {

@@ -20,10 +20,26 @@
   }
 }
 
+.btn--spinner {
+  bottom: 5px;
+  right: 5px;
+}
+
 .spinner--main {
   .spinner__circle {
     border-top-color: $main;
   }
+}
+
+.spinner--white {
+  .spinner__circle {
+    border-top-color: $white;
+  }
+}
+
+.spinner--small {
+  width: 15px;
+  height: 15px;
 }
 
 .spinner--medium {

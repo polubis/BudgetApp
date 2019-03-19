@@ -8,7 +8,7 @@ type Props = {
   sizeClass: string
 }
 
-const Spinner: React.SFC<Props | any> = ({positionClass = 'centered', appearanceClass='spinner--main', sizeClass = 'spinner--medium'}) => {
+const Spinner = ({positionClass = 'centered', appearanceClass='spinner--main', sizeClass = 'spinner--medium'}: Props & any) => {
   return (
     <div className={`spinner ${positionClass} ${appearanceClass} ${sizeClass}`}>
       <div className='spinner__circle' />

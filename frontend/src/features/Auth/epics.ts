@@ -1,16 +1,17 @@
 import { isOfType } from 'typesafe-actions';
-import { tap, filter } from 'rxjs/operators';
 import { Epic } from 'redux-observable';
-import { RootAction, RootState } from 'StoreTypes';
+import { filter, switchMap, debounceTime } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { RootAction } from 'StoreTypes';
+
 import { CREATE_ACCOUNT } from './constants';
+import { createAccountSuccess } from './actions';
 
-
-export const createAccountAction: Epic<RootAction, RootAction, RootState> = 
-  (action$, state$) =>
-    action$.pipe(
-      filter(isOfType(CREATE_ACCOUNT)),
-      tap(action => {
-        console.log(action);
-        console.log("Siema");
-      })
-    )
+export const createAccountAction: Epic<RootAction, RootAction> = (action$) =>
+  action$.pipe(
+    filter(isOfType(CREATE_ACCOUNT)),
+    debounceTime(250),
+    switchMap(() => 
+      of(createAccountSuccess())
+    ),
+  );
