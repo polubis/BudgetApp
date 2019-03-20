@@ -6,6 +6,8 @@ const graphQlHttp = require('express-graphql');
 const graphQlSchema = require('./graphql/schema/index');
 const graphQlResolvers = require('./graphql/resolvers/index');
 
+const formatError = require('./graphql/errors/index');
+
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/BudgetApp')
@@ -39,15 +41,8 @@ app.use((req, res, next) => {
 app.use('/graphql', graphQlHttp({
   schema: graphQlSchema,
   rootValue: graphQlResolvers,
-  graphiql: true
+  graphiql: true,
+  formatError: err => formatError.getError(err)
 }));
 
-app.use((req, res, next) => {
-  console.log(res);
-  next();
-});
-
 app.listen(3030);
-
-
-// .populate('creator')
