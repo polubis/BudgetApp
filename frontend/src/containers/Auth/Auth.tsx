@@ -4,11 +4,14 @@ import Modal from '../../components/common/Modal/Modal';
 import AuthHeader from '../../components/auth/AuthHeader/AuthHeader';
 import Commercial from '../../components/auth/Commercial/Commercial';
 import Spinner from '../../components/ui/Spinner/Spinner';
+import Alerts from '../../components/common/Alerts/Alerts';
 
 import LaptoptImg from './assets/laptop.jpg';
 import LaptopStatsImg from './assets/laptop-stats.jpg';
 
 import Loadable from 'react-loadable';
+
+import './Auth.scss';
 
 const Login = Loadable({
   loader: () => import('./Login/Login'),
@@ -21,8 +24,6 @@ const Register = Loadable({
   loading: Spinner,
   delay: 2000
 });
-
-import './Auth.scss';
 
 type AuthProps = {
   close(): void;
@@ -42,6 +43,15 @@ class Auth extends React.Component<AuthProps, State> {
     const { currentForm } = this.state;
     return (
       <Modal id='auth' close={this.props.close}>
+        
+        <Alerts 
+          classes={`alerts--absolute ${currentForm === 'login' ? 'alerts--login' : 'alerts--register'}`}
+          alerts={[
+            {id: 'createAccount', message: 'There is a problem with creating account', closeTime: 5000, type: 'error'},
+            {id: 'createAccount2', message: 'There is a problem with creating dadsddsa', closeTime: 5000, type: 'error'},
+
+          ]}
+        />
 
         <div id='auth__login-wrap'>
           {currentForm === 'login' ? 

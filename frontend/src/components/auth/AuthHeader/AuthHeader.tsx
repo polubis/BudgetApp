@@ -9,7 +9,7 @@ type AuthHeaderProps = {
   action(): void;
 }
 
-const AuthHeader: React.SFC<AuthHeaderProps> = ({message, logInClass, registerClass, action}) => (
+const AuthHeader = ({message, logInClass, registerClass, action}: AuthHeaderProps) => (
   <h2 className='auth-header l-font-color'>
     <div onClick={action}>
       <span className={`${logInClass} click`}>Login</span>

@@ -1,0 +1,22 @@
+.alerts {
+  z-index: 10;
+}
+
+.alerts--fixed {
+  position: fixed;
+}
+
+.alerts--absolute {
+  position: absolute;
+}
+
+.alerts--login {
+  width: 400px;
+  bottom: 0;
+  left: 0;
+}
+
+.alerts--register {
+  top: 0;
+  right: 0;
+}

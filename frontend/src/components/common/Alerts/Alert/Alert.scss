@@ -1,0 +1,40 @@
+@import '../../../../theme.scss';
+
+.alert {
+  padding: 14px 15px 15px 15px;
+  width: 100%;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  animation: .4s alert-in;
+  will-change: opacity transform;
+  border-top: 1px solid $white;
+  @keyframes alert-in {
+    from {
+      opacity: 0;
+      transform: translateY(-15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .alert__message {
+    font-size: 12px;
+    font-weight: 300;
+    margin-left: 15px;
+  }
+}
+
+.alert--error {
+  background: $error;
+  color: $white;
+}
+
+// .alert--warn {
+
+// }
+
+// .alert--ok {
+
+// }
