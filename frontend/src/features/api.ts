@@ -1,23 +1,37 @@
-import axios, { AxiosPromise } from 'axios';
+import axios, { AxiosPromise, AxiosResponse } from 'axios';
 
-import { GraphQlBody } from './models';
+import { GraphQlBody, GrapQlResponse, GrapQlError } from './models';
 
 const API = 'http://localhost:3030/graphql';
 
-const parseBody = (body: GraphQlBody<any>): string => JSON.stringify(body);
+const parseBody = <T>(body: GraphQlBody<T>): string => JSON.stringify(body);
 
-const executeRequest = <T>(body: GraphQlBody<T>): Promise<any> => {
+const executeRequest = <T>(body: GraphQlBody<T>): Promise<T> => new Promise((resolve, reject) => {
+  prepareRequest(body).then((res: AxiosResponse<any>) => {
+    const { data, errors }: GrapQlResponse = res.data;
+    const errorsOccured = errors.length > 0;
+    const requestId = Object.keys(data)[0];
+
+    if (errorsOccured) {
+      console.log(requestId);
+      reject(errors[0] as GrapQlError); 
+    }
+    resolve(data);
+  }).catch(err => {
+    reject();
+  });
+});
+
+const prepareRequest = <T>(body: GraphQlBody<T>): AxiosPromise<T> => {
   const parsedBody = parseBody(body);
 
-  const request: AxiosPromise<any> = axios.post(API, parsedBody, 
+  return axios.post(API, parsedBody, 
     {
       headers: {
         'Content-Type': 'application/json'
       }
     }
   );
-
-  return request;
 }
 
 export default executeRequest;

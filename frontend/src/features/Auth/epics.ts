@@ -16,12 +16,11 @@ export const createAccountAction: Epic<RootAction, RootAction> = (action$) =>
     debounceTime(250),
     mergeMap(action => {
       return from(executeRequest(createAccountQuery(action.payload))).pipe(
-        map(response => {
-          console.log(response);
+        map(res => {
+          console.log(res);
           return createAccountSuccess();
         }),
-        catchError(err => {
-          console.log(err);
+        catchError((err) => {
           return of(createAccountFailure());
         })
       )
