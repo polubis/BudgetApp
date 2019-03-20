@@ -2,7 +2,7 @@ import { ActionType } from 'typesafe-actions';
 import { combineReducers } from 'redux';
 
 import * as authActions from './actions';
-import { ADD_ALERT, REMOVE_ALERT } from './constants';
+import { ADD_ALERT, REMOVE_ALERT, CLEAR_ALERTS } from './constants';
 import { AlertDefinition } from './models';
 
 export type AlertsState = {
@@ -28,6 +28,10 @@ const actionMap: any = {
   ({
     ...state,
     alerts: state.alerts.filter(({id}) => id !== alertId)
+  }),
+  [CLEAR_ALERTS]: (state: AlertsState) => ({
+    ...state,
+    alerts: []
   })
 };
 

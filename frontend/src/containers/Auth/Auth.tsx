@@ -20,7 +20,7 @@ const Login = Loadable({
 });
 
 const Register = Loadable({
-  loader: () => import('./Register/Register'),
+  loader: () => import('./Register/index'),
   loading: Spinner,
   delay: 2000
 });

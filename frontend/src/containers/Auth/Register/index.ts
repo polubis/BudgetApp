@@ -1,18 +1,22 @@
-export default {
-  username: {
-    appearance: {title: 'username', icon: 'email'},
-    logic: {value: '', validators: { required: true, minLength: 2, maxLength: 25 }}
-  },
-  email: {
-    appearance: {title: 'email', icon: 'person'},
-    logic: {value: '', validators: { required: true, minLength: 5, maxLength: 254 } }
-  },
-  password: {
-    appearance: {title: 'password', icon: 'lock'},
-    logic: {value: '', validators: { required: true, minLength: 8, maxLength: 20 }}
-  },
-  repeatedPassword: {
-    appearance: {title: 'repeated password', icon: 'lock'},
-    logic: {value: '', validators: { required: true, minLength: 8, maxLength: 20 } }
-  }
-}
+import StoreTypes from 'StoreTypes';
+import { connect } from 'react-redux';
+import { Dispatch, bindActionCreators } from 'redux';
+
+import { createAccount } from '../../../features/Auth/actions';
+import { clearAlerts } from '../../../features/Alerts/actions';
+import { getIsCreatingAccount } from '../../../features/Auth/selectors';
+
+import Register from './Register';
+
+const mapStateToProps = (state: StoreTypes.RootState) => ({
+  isCreatingAccount: getIsCreatingAccount(state.auth.authReducer)
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<StoreTypes.RootAction>) => 
+  bindActionCreators(
+    {
+      createAccount,
+      clearAlerts
+    }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
