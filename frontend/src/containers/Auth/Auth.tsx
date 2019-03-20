@@ -46,11 +46,6 @@ class Auth extends React.Component<AuthProps, State> {
         
         <Alerts 
           classes={`alerts--absolute ${currentForm === 'login' ? 'alerts--login' : 'alerts--register'}`}
-          alerts={[
-            {id: 'createAccount', message: 'There is a problem with creating account', closeTime: 5000, type: 'error'},
-            {id: 'createAccount2', message: 'There is a problem with creating dadsddsa', closeTime: 5000, type: 'error'},
-
-          ]}
         />
 
         <div id='auth__login-wrap'>

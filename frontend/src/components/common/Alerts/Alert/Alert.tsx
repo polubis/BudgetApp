@@ -1,18 +1,40 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import MaterialIcon from '@material/react-material-icon';
 
-import { AlertDefinition } from '../types';
+import { AlertDefinition } from '../../../../features/Alerts/models';
 
 import './Alert.scss';
 
-const Alert = ({id, message, closeTime, type}: AlertDefinition) => (
-  <li className={`alert alert--${type}`}>
-    <MaterialIcon 
-      icon='error'
-    />
-    <span className='alert__message'>{message}</span>
-  </li>
-);
+type AlertProps = {
+  removeAlert: (alertId: string) => any;
+}
+
+const Alert = ({id, message, closeTime, type, removeAlert}: AlertProps & AlertDefinition) => {
+  useEffect(() => {
+    let timer: any;
+
+    if (!timer) {
+      timer = setTimeout(() => removeAlert(id), closeTime);
+    }
+    else {
+      clearTimeout(timer);
+      timer = setTimeout(() => removeAlert(id), closeTime);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    }
+  });
+
+  return (
+    <li className={`click alert alert--${type}`} onClick={() => removeAlert(id)}>
+      <MaterialIcon 
+        icon='error'
+      />
+      <span className='alert__message'>{message}</span>
+    </li>
+  );
+};
 
 export default Alert;

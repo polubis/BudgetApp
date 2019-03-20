@@ -1,5 +1,8 @@
 import axios, { AxiosPromise, AxiosResponse } from 'axios';
+import store from '../store/index';
+import * as alertsActions from './Alerts/actions';
 
+import { AlertDefinition } from './Alerts/models';
 import { GraphQlBody, GrapQlResponse, GrapQlError } from './models';
 
 const API = 'http://localhost:3030/graphql';
@@ -13,8 +16,10 @@ const executeRequest = <T>(body: GraphQlBody<T>): Promise<T> => new Promise((res
     const requestId = Object.keys(data)[0];
 
     if (errorsOccured) {
-      console.log(requestId);
-      reject(errors[0] as GrapQlError); 
+      const error: GrapQlError = errors[0];
+      const alert: AlertDefinition = { id: requestId, message: error.message, closeTime: 5000, type: 'error' }; 
+      store.dispatch(alertsActions.addAlert(alert));
+      reject(error); 
     }
     resolve(data);
   }).catch(err => {
