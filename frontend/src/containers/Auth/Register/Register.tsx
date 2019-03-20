@@ -9,7 +9,7 @@ import { CreateAccountPayload } from '../../../features/Auth/models';
 import { getIsCreatingAccount } from '../../../features/Auth/selectors';
 
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { Dispatch, bindActionCreators } from 'redux';
 
 import './Register.scss';
 
@@ -33,8 +33,10 @@ const mapStateToProps = (state: StoreTypes.RootState) => ({
   isCreatingAccount: getIsCreatingAccount(state.auth.authReducer)
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<StoreTypes.RootAction>) => ({
-  createAccount: (payload: CreateAccountPayload) => dispatch(createAccount(payload))
-});
+const mapDispatchToProps = (dispatch: Dispatch<StoreTypes.RootAction>) => 
+  bindActionCreators(
+    {
+      createAccount
+    }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

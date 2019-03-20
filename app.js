@@ -28,8 +28,11 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
-    "POST,  OPTIONS"
+    "POST, GET, OPTIONS"
   );
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
   next();
 });
 
@@ -38,6 +41,11 @@ app.use('/graphql', graphQlHttp({
   rootValue: graphQlResolvers,
   graphiql: true
 }));
+
+app.use((req, res, next) => {
+  console.log(res);
+  next();
+});
 
 app.listen(3030);
 

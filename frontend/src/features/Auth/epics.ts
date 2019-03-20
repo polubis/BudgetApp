@@ -1,17 +1,29 @@
 import { isOfType } from 'typesafe-actions';
 import { Epic } from 'redux-observable';
-import { filter, switchMap, debounceTime } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { RootAction } from 'StoreTypes';
+import { filter, mergeMap, debounceTime, map, catchError } from 'rxjs/operators';
+import { from, of } from 'rxjs';
 
+import { RootAction } from 'StoreTypes';
 import { CREATE_ACCOUNT } from './constants';
-import { createAccountSuccess } from './actions';
+import { createAccountSuccess, createAccountFailure } from './actions';
+import { createAccountQuery } from './graph-ql';
+
+import executeRequest from '../api';
 
 export const createAccountAction: Epic<RootAction, RootAction> = (action$) =>
   action$.pipe(
     filter(isOfType(CREATE_ACCOUNT)),
     debounceTime(250),
-    switchMap(() => 
-      of(createAccountSuccess())
-    ),
+    mergeMap(action => {
+      return from(executeRequest(createAccountQuery(action.payload))).pipe(
+        map(response => {
+          console.log(response);
+          return createAccountSuccess();
+        }),
+        catchError(err => {
+          console.log(err);
+          return of(createAccountFailure());
+        })
+      )
+    })
   );

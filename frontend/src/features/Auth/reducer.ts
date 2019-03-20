@@ -2,7 +2,7 @@ import { ActionType } from 'typesafe-actions';
 import { combineReducers } from 'redux';
 
 import * as authActions from './actions';
-import { CREATE_ACCOUNT, CREATE_ACCOUNT_SUCCESS } from '../../constants';
+import { CREATE_ACCOUNT, CREATE_ACCOUNT_SUCCESS, CREATE_ACCOUNT_FAILURE } from './constants';
 
 export type AuthState = {
   readonly isCreatingAccount: boolean;
@@ -23,6 +23,11 @@ const actionMap: any = {
   [CREATE_ACCOUNT_SUCCESS]: (state: AuthState) => 
   ({
     ...state,
+    isCreatingAccount: false
+  }),
+  [CREATE_ACCOUNT_FAILURE]: (state: AuthState) => 
+  ({
+    ...state, 
     isCreatingAccount: false
   })
 };
