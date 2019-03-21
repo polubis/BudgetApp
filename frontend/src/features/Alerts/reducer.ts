@@ -18,11 +18,10 @@ const initialState: AlertsState = {
 const actionMap: any = {
   [ADD_ALERT]: (state: AlertsState, alert: AlertDefinition) => 
   ({
-    ...state,
-    alerts: 
-      state.alerts.findIndex(({id}) => id === alert.id) > -1 ? 
-      state.alerts.map(a => a.id === alert.id ? {...alert} : a) : 
-      [...state.alerts, alert]
+    ...state, 
+    alerts: [
+      ...state.alerts, alert
+    ]
   }),
   [REMOVE_ALERT]: (state: AlertsState, alertId: string) => 
   ({

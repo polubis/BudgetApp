@@ -1,8 +1,9 @@
 import axios, { AxiosPromise, AxiosResponse } from 'axios';
 import store from '../store/index';
-import * as alertsActions from './Alerts/actions';
+import { alertsDefinitions } from './Alerts/alerts-definitions';
 
-import { AlertDefinition } from './Alerts/models';
+import { tryAddAlert } from './Alerts/actions';
+import { AlertDefinition, AlertsMetaData } from './Alerts/models';
 import { GraphQlBody, GrapQlResponse, GrapQlError } from './models';
 
 const API = 'http://localhost:3030/graphql';
@@ -11,21 +12,42 @@ const parseBody = <T>(body: GraphQlBody<T>): string => JSON.stringify(body);
 
 const executeRequest = <T>(body: GraphQlBody<T>): Promise<T> => new Promise((resolve, reject) => {
   prepareRequest(body).then((res: AxiosResponse<any>) => {
-    const { data, errors }: GrapQlResponse = res.data;
-    const errorsOccured = errors.length > 0;
-    const requestId = Object.keys(data)[0];
 
-    if (errorsOccured) {
-      const error: GrapQlError = errors[0];
-      const alert: AlertDefinition = { id: requestId, message: error.message, closeTime: 5000, type: 'error' }; 
-      store.dispatch(alertsActions.addAlert(alert));
-      reject(error); 
-    }
-    resolve(data);
+    manageAlertsMetaData(res.data, 
+      (requestId: string, message: string) => {
+        handleAddNewAlert(new AlertDefinition(requestId, message, 'error'));
+        reject(message);
+      },
+      (alert: AlertDefinition, data: any) => {
+        if (alert) {
+          handleAddNewAlert(alert);
+        }
+        resolve(data);
+      }
+    );
+
   }).catch(err => {
     reject();
   });
 });
+
+const manageAlertsMetaData = ({data, errors}: GrapQlResponse, onErrorsOccured: any, onSuccessOccured: any) => {
+  const errorsOccured: GrapQlError[] | undefined = errors; 
+  const requestId = Object.keys(data)[0];
+  const alertMetaData: AlertsMetaData | undefined = alertsDefinitions[requestId];
+  if (errorsOccured) {
+    if (!alertMetaData || alertMetaData.showMessageOnError) {
+      onErrorsOccured(requestId, errors[0].message);
+    }
+  }
+  else {
+    onSuccessOccured(alertMetaData.alert, data);
+  }
+}
+
+const handleAddNewAlert = (alert: AlertDefinition): void => {
+  store.dispatch(tryAddAlert(alert));
+}
 
 const prepareRequest = <T>(body: GraphQlBody<T>): AxiosPromise<T> => {
   const parsedBody = parseBody(body);

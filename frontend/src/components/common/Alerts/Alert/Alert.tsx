@@ -10,6 +10,12 @@ type AlertProps = {
   removeAlert: (alertId: string) => any;
 }
 
+const icons: {[key: string]: string} = {
+  error: 'error' ,
+  warn: 'warn',
+  ok: 'check'
+}
+
 const Alert = ({id, message, closeTime, type, removeAlert}: AlertProps & AlertDefinition) => {
   useEffect(() => {
     let timer: any;
@@ -29,9 +35,7 @@ const Alert = ({id, message, closeTime, type, removeAlert}: AlertProps & AlertDe
 
   return (
     <li className={`click alert alert--${type}`} onClick={() => removeAlert(id)}>
-      <MaterialIcon 
-        icon='error'
-      />
+      <MaterialIcon icon={icons[type]} />
       <span className='alert__message'>{message}</span>
     </li>
   );

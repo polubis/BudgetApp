@@ -10,14 +10,13 @@ import { createAccountQuery } from './graph-ql';
 
 import executeRequest from '../api';
 
-export const createAccountAction: Epic<RootAction, RootAction> = (action$) =>
+export const createAccountEpic: Epic<RootAction, RootAction> = (action$) =>
   action$.pipe(
     filter(isOfType(CREATE_ACCOUNT)),
     debounceTime(250),
     mergeMap(action => {
       return from(executeRequest(createAccountQuery(action.payload))).pipe(
         map(res => {
-          console.log(res);
           return createAccountSuccess();
         }),
         catchError((err) => {

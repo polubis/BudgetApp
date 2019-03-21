@@ -24,7 +24,7 @@
   .alert__message {
     font-size: 12px;
     font-weight: 300;
-    margin-left: 15px;
+    margin-left: 10px;
   }
 }
 
@@ -32,3 +32,9 @@
   background: $error;
   color: $white;
 }
+
+.alert--ok {
+  background: $ok;
+  color: $white;
+}
+

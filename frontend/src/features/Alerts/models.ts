@@ -2,13 +2,16 @@ const error = 'error'
 const warn = 'warn';
 const ok = 'ok';
 
-type Error = typeof error;
-type Warn = typeof warn;
-type Ok = typeof ok;
+export type Error = typeof error;
+export type Warn = typeof warn;
+export type Ok = typeof ok;
 
-export type AlertDefinition = {
-  id: string;
-  message: string;
-  type: Error | Warn | Ok;
-  closeTime?: number;
+export class AlertDefinition {
+  constructor(public id: string, public message: string, public type: Error | Warn | Ok, public closeTime: number = 5000) {
+  }
+}
+
+export class AlertsMetaData {
+  constructor(public alert?: AlertDefinition | null, public showMessageOnError: boolean = true) {
+  }
 }
