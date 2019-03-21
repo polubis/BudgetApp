@@ -9,7 +9,7 @@ import { Consumer, FormContext } from '../../Form';
 import './FormGroup.scss';
 
 type Props = {
-  updateValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleTyping: (e: React.ChangeEvent<HTMLInputElement>) => void;
   id: string;
   value: any;
   errorsOccured?: boolean | null;
@@ -32,7 +32,7 @@ class FormGroup extends Component<Props & FormAppearanceSetting, any> {
   }
 
   render() {
-    const { id, value, errorsOccured, validationResult, updateValue, icon, title, placeholder } = this.props;
+    const { id, value, errorsOccured, validationResult, handleTyping, icon, title, placeholder } = this.props;
     
     return (
     <Consumer>
@@ -46,7 +46,7 @@ class FormGroup extends Component<Props & FormAppearanceSetting, any> {
               id={title}
               value={value}
               className='content__item'
-              onChange={updateValue}
+              onChange={handleTyping}
               onFocus={() => changeFocusedInput(id)}
               onBlur={() => changeFocusedInput('')}
               type='text' 

@@ -16,6 +16,7 @@ export const initializeState = (formSettings: FormSettings): {values: FormValues
       }, {}) : {}
     } 
   })
+
   return { values, errors };
 }
 
@@ -36,3 +37,21 @@ export const modifyFormError = (value: any, title: string, validators: Validator
     validationResult
   };
 } 
+
+export const modifyFormErrors = (curValues: FormValues, currErrors: FormErrors, formSettings: FormSettings): 
+  {areValuesValid: boolean, errors: FormErrors} => {
+  const errors: FormErrors = {};
+  let areValuesValid = true;
+
+  Object.keys(curValues).forEach(key => {
+    const { validators } = formSettings[key].logic;
+    errors[key] = validators ? 
+      modifyFormError(curValues[key], formSettings[key].appearance.title, validators) : currErrors[key];
+      
+    if (errors[key].errorsOccured) {
+      areValuesValid = false;
+    }
+  });
+
+  return { areValuesValid, errors };
+}

@@ -1,7 +1,7 @@
 @import '../../../../theme.scss';
 
 .alert {
-  padding: 9px 10px 10px 10px;
+  padding: 14px 15px 15px 15px;
   width: 100%;
   z-index: 4;
   display: flex;
@@ -22,9 +22,9 @@
     }
   }
   .alert__message {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 300;
-    margin-left: 10px;
+    margin-left: 14px;
   }
 }
 

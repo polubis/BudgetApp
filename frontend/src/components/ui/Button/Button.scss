@@ -38,6 +38,11 @@
 
 .bg-btn {
   border: none;
+  &:disabled {
+    background: $disabled-btn;
+    color: $font;
+    cursor: not-allowed;
+  }
 }
 
 .bg-btn--main {

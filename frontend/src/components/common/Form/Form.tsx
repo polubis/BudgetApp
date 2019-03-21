@@ -28,18 +28,20 @@ export const { Provider, Consumer } = createContext({
 export const Form = ({settings, actionAfterSubmit, isOnSubmit, ...rest}: Props & TemplateViewProps) => (
   <FormManager settings={settings} actionAfterSubmit={actionAfterSubmit}>
 
-    {(currentFocusedInput, values, errors, updateValue, handleSubmit, changeFocusedInput) => (
+    {(isFormDirty, isFormValid, currentFocusedInput, values, errors, handleTyping, handleSubmit, changeFocusedInput) => (
     <Provider value={{
       currentFocusedInput: currentFocusedInput,
       changeFocusedInput: changeFocusedInput
     }}>
       <FormTemplate 
         {...rest}
+        isFormDirty={isFormDirty}
+        isFormValid={isFormValid}
         values={values}
         errors={errors}
         settings={settings}
         onSubmit={handleSubmit}
-        updateValue={updateValue}
+        handleTyping={handleTyping}
         isOnSubmit={isOnSubmit}
       />
     </Provider>

@@ -22,7 +22,7 @@ const Register = ({createAccount, isCreatingAccount, clearAlerts}: RegisterProps
   return (
     <Form 
       formClass='register-form col'
-      btnTitle='Submit'
+      btnTitle='Create account'
       btnClasses='bg-btn bg-btn--main btn--medium login-btn'
       settings={RegisterFormSettings}
       actionAfterSubmit={values => createAccount(values as CreateAccountPayload)}
