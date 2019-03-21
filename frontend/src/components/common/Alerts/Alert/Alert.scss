@@ -1,7 +1,7 @@
 @import '../../../../theme.scss';
 
 .alert {
-  padding: 14px 15px 15px 15px;
+  padding: 15px;
   width: 100%;
   z-index: 4;
   display: flex;
@@ -9,7 +9,7 @@
   animation: .3s alert-in;
   will-change: transform;
   &:not(:first-of-type) {
-    border-top: 1px solid $white;
+    margin-top: 10px;
   }
   @keyframes alert-in {
     from {

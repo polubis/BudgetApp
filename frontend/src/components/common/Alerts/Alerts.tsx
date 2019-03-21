@@ -5,25 +5,25 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { AlertDefinition } from '../../../features/Alerts/models';
 import { getAlerts } from '../../../features/Alerts/selectors';
 import { removeAlert } from '../../../features/Alerts/actions';
+
 import Alert from './Alert/Alert';
 import StoreTypes from 'StoreTypes';
 
 import './Alerts.scss';
 
 type AlertsProps = {
-  classes: string;
   alerts: AlertDefinition[];
   removeAlert: (alertId: string) => any;
 }
 
-const Alerts = ({alerts, classes, removeAlert}: AlertsProps) => (
-  <div className={`alerts ${classes}`}>
+const Alerts = ({alerts, removeAlert}: AlertsProps) => (
+  <div className='alerts'>
     <ul>
       {alerts.map(alert => (
         <Alert 
+          {...alert}
           key={alert.id} 
           removeAlert={removeAlert}
-          {...alert}
         />
       ))}
     </ul>

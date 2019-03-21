@@ -4,7 +4,6 @@ import Modal from '../../components/common/Modal/Modal';
 import AuthHeader from '../../components/auth/AuthHeader/AuthHeader';
 import Commercial from '../../components/auth/Commercial/Commercial';
 import Spinner from '../../components/ui/Spinner/Spinner';
-import Alerts from '../../components/common/Alerts/Alerts';
 
 import LaptoptImg from './assets/laptop.jpg';
 import LaptopStatsImg from './assets/laptop-stats.jpg';
@@ -44,10 +43,6 @@ class Auth extends React.Component<AuthProps, State> {
     return (
       <Modal id='auth' close={this.props.close}>
         
-        <Alerts 
-          classes={`alerts--absolute ${currentForm === 'login' ? 'alerts--login' : 'alerts--register'}`}
-        />
-
         <div id='auth__login-wrap'>
           {currentForm === 'login' ? 
             <>
