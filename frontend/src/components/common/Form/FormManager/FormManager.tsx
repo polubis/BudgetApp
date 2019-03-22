@@ -1,7 +1,6 @@
 import React, { FormEvent } from 'react';
 
-import { FormValues, FormErrors } from '../types';
-import { FormSettings } from '../Form';
+import { FormSettings, FormValues, FormErrors } from 'FormTypes';
 import { initializeState, modifyFormError, modifyFormErrors } from '../helpers';
 
 type State = {

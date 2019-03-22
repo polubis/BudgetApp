@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import MaterialIcon from '@material/react-material-icon';
 import ValidationErrors from './ValidationErrors/ValidationErrors';
 
-import { FormAppearanceSetting, ValidationResult } from '../../types';
+import { FormAppearanceSetting, ValidationResult } from 'FormTypes';
 import { Consumer, FormContext } from '../../Form';
 
 import './FormGroup.scss';

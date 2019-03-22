@@ -14,7 +14,6 @@ const withSpamPreventing = <P extends InjectedProps>(Component: React.ComponentT
       $event.pipe(
         debounceTime(500)
       ).subscribe((value: any) => {
-        console.log(value);
       })    
 
       return () => {

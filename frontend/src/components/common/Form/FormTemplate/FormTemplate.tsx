@@ -3,8 +3,7 @@ import React, { FormEvent } from 'react';
 import FormGroup from './FormGroup/FormGroup';
 import Button from '../../../ui/Button/Button';
 
-import { FormValues, FormErrors, TemplateViewProps } from '../types';
-import { FormSettings } from '../Form';
+import { FormSettings, FormValues, FormErrors, TemplateViewProps } from 'FormTypes';
 
 import './FormTemplate.scss';
 

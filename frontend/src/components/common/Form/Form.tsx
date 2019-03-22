@@ -1,6 +1,6 @@
 import React, { createContext } from 'react'
 
-import { FormSetting, FormValues, TemplateViewProps } from './types';
+import { FormSettings, FormValues, TemplateViewProps } from 'FormTypes';
 
 import FormManager from './FormManager/FormManager';
 import FormTemplate from './FormTemplate/FormTemplate';
@@ -9,10 +9,6 @@ type Props = {
   settings: FormSettings;
   actionAfterSubmit: (values: FormValues) => void;
   isOnSubmit?: boolean;
-}
-
-export type FormSettings = {
-  [key: string] : FormSetting;
 }
 
 export type FormContext = {

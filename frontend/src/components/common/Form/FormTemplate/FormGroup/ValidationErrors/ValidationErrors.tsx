@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ValidationResult } from '../../../types';
+import { ValidationResult } from 'FormTypes';
 
 import MaterialIcon from '@material/react-material-icon';
 

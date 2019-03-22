@@ -1,22 +1,12 @@
 import React from 'react';
 
 import Button from '../../../components/ui/Button/Button';
-import Form, { FormSettings } from '../../../components/common/Form/Form';
+import Form from '../../../components/common/Form/Form';
+import LoginFormSettings from './form-config';
 
 import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
 
 import './Login.scss';
-
-const LoginFormSettings: FormSettings = {
-  email: {
-    appearance: {title: 'email', icon: 'email'},
-    logic: {value: '', validators: { required: true, minLength: 3, maxLength: 25 }}
-  },
-  password: {
-    appearance: {title: 'password', icon: 'lock'},
-    logic: {value: '', validators: { required: true, minLength: 5, maxLength: 25 } }
-  }
-}
 
 const Login = () => (
   <>
