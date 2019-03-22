@@ -26,7 +26,7 @@ const executeRequest = <T>(body: GraphQlBody<T>): Promise<any> => new Promise((r
     );
 
   }).catch(() => {
-    const errorAlert = new AlertDefinition('other-error', 'There is a other problem that usually. Try again later', 'error', 5000);
+    const errorAlert = alertsDefinitions['unknownError'].alert!;
     handleAddNewAlert(errorAlert);
     reject();
   });

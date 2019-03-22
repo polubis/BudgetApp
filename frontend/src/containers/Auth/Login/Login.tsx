@@ -11,7 +11,7 @@ import { ILogin, ILoginMethods } from './index';
 import './Login.scss';
 
 const Login = ({isInAuthProcess, loggedUser, tryLogIn}: ILogin & ILoginMethods) => {
-
+  console.log(loggedUser);
   return (
     <>
       <Form 
