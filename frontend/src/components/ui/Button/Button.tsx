@@ -4,8 +4,8 @@ import Spinner from '../Spinner/Spinner';
 
 import './Button.scss';
 
-export type ButtonProps = {
-  disabled?: boolean;
+interface ButtonProps {
+  disabled?: boolean; 
   id?: string;
   showLoader?: boolean;
   classes: string;
@@ -13,6 +13,7 @@ export type ButtonProps = {
   size?: string; 
   action(params: any): any;
 };
+
 
 const Button = ({id, showLoader, classes, disabled, title, size, action}: ButtonProps) => (
   <button
