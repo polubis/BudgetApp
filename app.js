@@ -5,8 +5,8 @@ const graphQlHttp = require('express-graphql');
 
 const graphQlSchema = require('./graphql/schema/index');
 const graphQlResolvers = require('./graphql/resolvers/index');
-
 const formatError = require('./graphql/errors/index');
+const isAuth = require('./middleware/is-auth');
 
 const app = express();
 
@@ -37,6 +37,8 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use(isAuth);
 
 app.use('/graphql', graphQlHttp({
   schema: graphQlSchema,

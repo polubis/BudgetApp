@@ -5,6 +5,7 @@ module.exports = buildSchema(`
     _id: ID!
     email: String!
     username: String!
+    token: String
   }
 
   input UserInput {
@@ -13,12 +14,19 @@ module.exports = buildSchema(`
     password: String!
   }
 
+  input LogInInput {
+    username: String
+    email: String
+    password: String! 
+  }
+
   type RootQuery {
     users: [User!]!
   }
 
   type RootMutation {
     createAccount(userInput: UserInput): User
+    logIn(logInInput: LogInInput): User
   }
 
   schema {

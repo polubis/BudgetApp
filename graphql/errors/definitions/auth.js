@@ -11,6 +11,7 @@ module.exports = {
   PASSWORD_MIN_LENGTH: 'Password field must have 8 or more characters',
   PASSWORD_MAX_LENGTH: 'Password field must have 20 or less characters',
 
-  USER_EXISTS: 'User with given data already exists'
+  USER_EXISTS: 'User with given data already exists',
+  INVALID_CREDENTIALS: 'Invalid authorization credentials'
 }
 
