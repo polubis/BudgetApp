@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import RegisterFormSettings from './form-config';
 
 import Form from '../../../components/common/Form/Form';
 
 import { CreateAccountPayload } from '../../../features/Auth/models';
+import { IRegister, IRegisterMethods } from './index';
 
 import './Register.scss';
 
-type RegisterProps = {
-  createAccount: (values: CreateAccountPayload) => any;
-  clearAlerts: () => any;
-  isCreatingAccount: boolean;
-}
-
-const Register = ({createAccount, isCreatingAccount, clearAlerts}: RegisterProps) => {
-
-  useEffect(() => {
-    return () => clearAlerts();
-  }, []);
+const Register = ({createAccount, isCreatingAccount}: IRegister & IRegisterMethods) => {
 
   return (
     <Form 

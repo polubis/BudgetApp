@@ -2,33 +2,54 @@ import { ActionType } from 'typesafe-actions';
 import { combineReducers } from 'redux';
 
 import * as authActions from './actions';
-import { CREATE_ACCOUNT, CREATE_ACCOUNT_SUCCESS, CREATE_ACCOUNT_FAILURE } from './constants';
+import * as aTypes from './constants';
+import { User } from 'Entities';
 
 export type AuthState = {
   readonly isCreatingAccount: boolean;
+  readonly isInAuthProcess: boolean;
+  readonly loggedUser: User | null;
 }
 
 export type AuthActions = ActionType<typeof authActions>;
 
 const initialState: AuthState = {
   isCreatingAccount: false,
+  isInAuthProcess: false,
+  loggedUser: null
 };
 
 const actionMap: any = {
-  [CREATE_ACCOUNT]: (state: AuthState) => 
+  [aTypes.CREATE_ACCOUNT]: (state: AuthState) => 
   ({
     ...state,
     isCreatingAccount: true
   }),
-  [CREATE_ACCOUNT_SUCCESS]: (state: AuthState) => 
+  [aTypes.CREATE_ACCOUNT_SUCCESS]: (state: AuthState) => 
   ({
     ...state,
     isCreatingAccount: false
   }),
-  [CREATE_ACCOUNT_FAILURE]: (state: AuthState) => 
+  [aTypes.CREATE_ACCOUNT_FAILURE]: (state: AuthState) => 
   ({
     ...state, 
     isCreatingAccount: false
+  }),
+  [aTypes.TRY_LOG_IN]: (state: AuthState) => 
+  ({
+    ...state,
+    isInAuthProcess: true
+  }),
+  [aTypes.LOG_IN_SUCCESS]: (state: AuthState, user: User) => 
+  ({
+    ...state,
+    loggedUser: user,
+    isInAuthProcess: false
+  }),
+  [aTypes.LOG_IN_FAILURE]: (state: AuthState) => 
+  ({
+    ...state,
+    isInAuthProcess: false
   })
 };
 

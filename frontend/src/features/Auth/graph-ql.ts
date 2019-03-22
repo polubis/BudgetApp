@@ -1,7 +1,7 @@
-import { CreateAccountPayload } from './models';
+import { CreateAccountPayload, LogInPayload } from './models';
 import { GraphQlBody } from '../models';
 
-const createAccountQuery = (payload: CreateAccountPayload): GraphQlBody<CreateAccountPayload> => 
+const createAccountMutation = (payload: CreateAccountPayload): GraphQlBody<CreateAccountPayload> => 
   ({
     query: `
       mutation CreateAccount($email: String!, $username: String!, $password: String!) {
@@ -15,6 +15,22 @@ const createAccountQuery = (payload: CreateAccountPayload): GraphQlBody<CreateAc
     variables: {...payload}
   });
 
+const logInMutation = (payload: LogInPayload): GraphQlBody<LogInPayload> => 
+  ({
+    query: `
+      mutation LogIn($username: String!, $password: String!) {
+        logIn(logInInput: {username: $username, password: $password}) {
+          _id
+          username
+          email
+          token
+        }
+      }
+    `,
+    variables: {...payload}
+  })
+
 export {
-  createAccountQuery
+  createAccountMutation,
+  logInMutation
 }

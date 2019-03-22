@@ -3,3 +3,8 @@ export type CreateAccountPayload = {
   email: string;
   password: string;
 }
+
+export type LogInPayload = {
+  username: string;
+  password: string;
+}

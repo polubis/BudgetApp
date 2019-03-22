@@ -13,7 +13,7 @@ import Loadable from 'react-loadable';
 import './Auth.scss';
 
 const Login = Loadable({
-  loader: () => import('./Login/Login'),
+  loader: () => import('./Login/index'),
   loading: Spinner,
   delay: 2000
 });

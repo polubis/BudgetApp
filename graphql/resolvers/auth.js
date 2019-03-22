@@ -35,11 +35,9 @@ module.exports = {
   },
   logIn: async ({logInInput}) => {
     try {
-      const { username, email, password } = logInInput;
+      const { username, password } = logInInput;
       
-      const existingUser = await User.findOne(
-        { $or:[ { username }, { email } ] }
-      );
+      const existingUser = await User.findOne({ username });
 
       if (!existingUser) {
         throw new Error(errorTypes.INVALID_CREDENTIALS);
@@ -50,15 +48,15 @@ module.exports = {
       if (!isEqual) {
         throw new Error(errorTypes.INVALID_CREDENTIALS);
       }
-      console.log(process.env.JWT_KEY);
+
       const token = jwt.sign(
-        { userId: existingUser._id, email, username },
+        { userId: existingUser._id, username },
         process.env.JWT_KEY,
         {
           expiresIn: '1h'
         }
       );
-        
+
       return { 
         _id: existingUser._id, 
         email: existingUser.email,

@@ -1,8 +1,8 @@
 import { FormSettings } from 'FormTypes';
 
 export default {
-  email: {
-    appearance: {title: 'email', icon: 'email'},
+  username: {
+    appearance: {title: 'username', icon: 'person'},
     logic: {value: '', validators: { required: true, minLength: 3, maxLength: 25 }}
   },
   password: {

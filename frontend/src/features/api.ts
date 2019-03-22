@@ -4,21 +4,20 @@ import { alertsDefinitions } from './Alerts/alerts-definitions';
 
 import { tryAddAlert } from './Alerts/actions';
 import { AlertDefinition, AlertsMetaData } from './Alerts/models';
-import { GraphQlBody, GrapQlResponse, GrapQlError } from './models';
+import { GraphQlBody, GrapQlResponse } from './models';
 
 const API = 'http://localhost:3030/graphql';
 
 const parseBody = <T>(body: GraphQlBody<T>): string => JSON.stringify(body);
 
-const executeRequest = <T>(body: GraphQlBody<T>): Promise<T> => new Promise((resolve, reject) => {
+const executeRequest = <T>(body: GraphQlBody<T>): Promise<any> => new Promise((resolve, reject) => {
   prepareRequest(body).then((res: AxiosResponse<any>) => {
-
     manageAlertsMetaData(res.data, 
       (requestId: string, message: string) => {
         handleAddNewAlert(new AlertDefinition(requestId, message, 'error'));
         reject(message);
       },
-      (alert: AlertDefinition, data: any) => {
+      (data: any, alert?: AlertDefinition) => {
         if (alert) {
           handleAddNewAlert(alert);
         }
@@ -26,22 +25,23 @@ const executeRequest = <T>(body: GraphQlBody<T>): Promise<T> => new Promise((res
       }
     );
 
-  }).catch(err => {
+  }).catch(() => {
+    const errorAlert = new AlertDefinition('other-error', 'There is a other problem that usually. Try again later', 'error', 5000);
+    handleAddNewAlert(errorAlert);
     reject();
   });
 });
 
 const manageAlertsMetaData = ({data, errors}: GrapQlResponse, onErrorsOccured: any, onSuccessOccured: any) => {
-  const errorsOccured: GrapQlError[] | undefined = errors; 
   const requestId = Object.keys(data)[0];
   const alertMetaData: AlertsMetaData | undefined = alertsDefinitions[requestId];
-  if (errorsOccured) {
+  if (errors !== undefined) {
     if (!alertMetaData || alertMetaData.showMessageOnError) {
       onErrorsOccured(requestId, errors[0].message);
     }
   }
   else {
-    onSuccessOccured(alertMetaData.alert, data);
+    onSuccessOccured(data, alertMetaData && alertMetaData.alert);
   }
 }
 

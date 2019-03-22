@@ -15,8 +15,7 @@ module.exports = buildSchema(`
   }
 
   input LogInInput {
-    username: String
-    email: String
+    username: String!
     password: String! 
   }
 
