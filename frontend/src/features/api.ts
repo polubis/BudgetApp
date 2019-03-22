@@ -49,16 +49,13 @@ const handleAddNewAlert = (alert: AlertDefinition): void => {
   store.dispatch(tryAddAlert(alert));
 }
 
-const prepareRequest = <T>(body: GraphQlBody<T>): AxiosPromise<T> => {
-  const parsedBody = parseBody(body);
-
-  return axios.post(API, parsedBody, 
+const prepareRequest = <T>(body: GraphQlBody<T>): AxiosPromise<T> => 
+  axios.post(API, parseBody(body), 
     {
       headers: {
         'Content-Type': 'application/json'
       }
     }
   );
-}
 
 export default executeRequest;
