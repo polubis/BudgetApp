@@ -7,16 +7,20 @@ import { User } from 'Entities';
 
 export type AuthState = {
   readonly isCreatingAccount: boolean;
+
   readonly isInAuthProcess: boolean;
   readonly loggedUser: User | null;
+  readonly token: string;
 }
 
 export type AuthActions = ActionType<typeof authActions>;
 
 const initialState: AuthState = {
   isCreatingAccount: false,
+
   isInAuthProcess: false,
-  loggedUser: null
+  loggedUser: null,
+  token: ''
 };
 
 const actionMap: any = {
@@ -32,12 +36,11 @@ const actionMap: any = {
   [aTypes.CANCEL_CREATE_ACCOUNT]: (state: AuthState) => ({
     ...state, isCreatingAccount: false
   }),
-
   [aTypes.TRY_LOG_IN]: (state: AuthState) => ({
     ...state, isInAuthProcess: true
   }),
-  [aTypes.LOG_IN_SUCCESS]: (state: AuthState, user: User) => ({
-    ...state, loggedUser: user, isInAuthProcess: false
+  [aTypes.LOG_IN_SUCCESS]: (state: AuthState, { payload }: any) => ({
+    ...state, loggedUser: payload.user, isInAuthProcess: false, token: payload.token
   }),
   [aTypes.LOG_IN_FAILURE]: (state: AuthState) => ({
     ...state, isInAuthProcess: false

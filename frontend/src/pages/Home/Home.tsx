@@ -11,7 +11,7 @@ import './Home.scss';
 
 type State = Readonly<{ currentOpenedForm: string }>;
 
-class Home extends React.Component<State, any> {
+class Home extends React.Component<any, State> {
   readonly state: State = { currentOpenedForm: 'login' };
 
   _togleAuth = (formName: string): void => {

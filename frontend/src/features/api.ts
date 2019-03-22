@@ -41,7 +41,7 @@ const manageAlertsMetaData = ({data, errors}: GrapQlResponse, onErrorsOccured: a
     }
   }
   else {
-    onSuccessOccured(data, alertMetaData && alertMetaData.alert);
+    onSuccessOccured(data[requestId], alertMetaData && alertMetaData.alert);
   }
 }
 

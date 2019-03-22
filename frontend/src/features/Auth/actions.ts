@@ -13,10 +13,9 @@ export const createAccountFailure = () => action(aTypes.CREATE_ACCOUNT_FAILURE);
 
 export const cancelCreateAccount = () => action(aTypes.CANCEL_CREATE_ACCOUNT);
 
-
 export const tryLogIn = (payload: LogInPayload) => action(aTypes.TRY_LOG_IN, payload);
 
-export const logInSuccess = (payload: User) => action(aTypes.LOG_IN_SUCCESS, payload);
+export const logInSuccess = (payload: {user: User, token: string}) => action(aTypes.LOG_IN_SUCCESS, payload);
 
 export const logInFailure = () => action(aTypes.LOG_IN_FAILURE);
 

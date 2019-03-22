@@ -8,6 +8,7 @@ import { CREATE_ACCOUNT, TRY_LOG_IN, CANCEL_LOG_IN, CANCEL_CREATE_ACCOUNT } from
 import { createAccountSuccess, createAccountFailure, logInFailure, logInSuccess } from './actions';
 import { User } from 'Entities';
 import { createAccountMutation, logInMutation } from './graph-ql';
+import { setCookie } from '../../services/cookies-service';
 
 import executeRequest from '../api';
 
@@ -30,7 +31,12 @@ export const logInEpic: Epic<RootAction, RootAction> = (action$) =>
     debounceTime(250),
     mergeMap(action =>
       from(executeRequest(logInMutation(action.payload))).pipe(
-        map(user => logInSuccess(user as User)),
+        map(res => {
+          const { token, ...rest } = res;
+          const user = {...rest} as User;
+          setCookie('token', token, 1);
+          return logInSuccess({user, token});
+        }),
         catchError(() => of(logInFailure())),
       )
     ),
