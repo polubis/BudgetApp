@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import RegisterFormSettings from './form-config';
 
 import Form from '../../../components/common/Form/Form';
@@ -8,7 +8,11 @@ import { IRegister, IRegisterMethods } from './index';
 
 import './Register.scss';
 
-const Register = ({createAccount, isCreatingAccount}: IRegister & IRegisterMethods) => {
+const Register = ({createAccount, isCreatingAccount, cancelCreateAccount}: IRegister & IRegisterMethods) => {
+
+  useEffect(() => {
+    return () => cancelCreateAccount();
+  }, []);
 
   return (
     <Form 

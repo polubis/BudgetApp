@@ -1,3 +1,5 @@
+import { FormSettings } from 'FormTypes';
+
 export default {
   username: {
     appearance: {title: 'username', icon: 'email'},
@@ -15,4 +17,4 @@ export default {
     appearance: {title: 'repeated password', icon: 'lock'},
     logic: {value: '', validators: { required: true, minLength: 8, maxLength: 20 } }
   }
-}
+} as FormSettings;

@@ -2,7 +2,7 @@ import StoreTypes from 'StoreTypes';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { createAccount } from '../../../features/Auth/actions';
+import { createAccount, cancelCreateAccount } from '../../../features/Auth/actions';
 import { getIsCreatingAccount } from '../../../features/Auth/selectors';
 
 import { CreateAccountPayload } from '../../../features/Auth/models';
@@ -14,7 +14,8 @@ export interface IRegister {
 }
 
 export interface IRegisterMethods {
-  createAccount: (values: CreateAccountPayload) => any;
+  createAccount: (values: CreateAccountPayload) => void;
+  cancelCreateAccount: () => void;
 }
 
 const mapStateToProps = (state: StoreTypes.RootState): IRegister => ({
@@ -24,7 +25,8 @@ const mapStateToProps = (state: StoreTypes.RootState): IRegister => ({
 const mapDispatchToProps = (dispatch: Dispatch<StoreTypes.RootAction>): IRegisterMethods => 
   bindActionCreators(
     {
-      createAccount,
+      cancelCreateAccount,
+      createAccount
     }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

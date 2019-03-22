@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FacebookLogin, { ReactFacebookLoginInfo } from 'react-facebook-login';
 
 import Button from '../../../components/ui/Button/Button';
@@ -10,8 +10,12 @@ import { ILogin, ILoginMethods } from './index';
 
 import './Login.scss';
 
-const Login = ({isInAuthProcess, loggedUser, tryLogIn}: ILogin & ILoginMethods) => {
-  console.log(loggedUser);
+const Login = ({isInAuthProcess, tryLogIn, cancelLogIn}: ILogin & ILoginMethods) => {
+
+  useEffect(() => {
+    return () => cancelLogIn();
+  }, []);
+
   return (
     <>
       <Form 

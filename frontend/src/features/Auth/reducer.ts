@@ -20,36 +20,30 @@ const initialState: AuthState = {
 };
 
 const actionMap: any = {
-  [aTypes.CREATE_ACCOUNT]: (state: AuthState) => 
-  ({
-    ...state,
-    isCreatingAccount: true
+  [aTypes.CREATE_ACCOUNT]: (state: AuthState) => ({
+    ...state, isCreatingAccount: true
   }),
-  [aTypes.CREATE_ACCOUNT_SUCCESS]: (state: AuthState) => 
-  ({
-    ...state,
-    isCreatingAccount: false
+  [aTypes.CREATE_ACCOUNT_SUCCESS]: (state: AuthState) => ({
+    ...state, isCreatingAccount: false
   }),
-  [aTypes.CREATE_ACCOUNT_FAILURE]: (state: AuthState) => 
-  ({
-    ...state, 
-    isCreatingAccount: false
+  [aTypes.CREATE_ACCOUNT_FAILURE]: (state: AuthState) => ({
+    ...state, isCreatingAccount: false
   }),
-  [aTypes.TRY_LOG_IN]: (state: AuthState) => 
-  ({
-    ...state,
-    isInAuthProcess: true
+  [aTypes.CANCEL_CREATE_ACCOUNT]: (state: AuthState) => ({
+    ...state, isCreatingAccount: false
   }),
-  [aTypes.LOG_IN_SUCCESS]: (state: AuthState, user: User) => 
-  ({
-    ...state,
-    loggedUser: user,
-    isInAuthProcess: false
+
+  [aTypes.TRY_LOG_IN]: (state: AuthState) => ({
+    ...state, isInAuthProcess: true
   }),
-  [aTypes.LOG_IN_FAILURE]: (state: AuthState) => 
-  ({
-    ...state,
-    isInAuthProcess: false
+  [aTypes.LOG_IN_SUCCESS]: (state: AuthState, user: User) => ({
+    ...state, loggedUser: user, isInAuthProcess: false
+  }),
+  [aTypes.LOG_IN_FAILURE]: (state: AuthState) => ({
+    ...state, isInAuthProcess: false
+  }),
+  [aTypes.CANCEL_LOG_IN]: (state: AuthState) => ({
+    ...state, isInAuthProcess: false
   })
 };
 
