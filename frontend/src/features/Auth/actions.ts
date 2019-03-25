@@ -11,7 +11,13 @@ export const createAccountSuccess = () => action(aTypes.CREATE_ACCOUNT_SUCCESS);
 
 export const createAccountFailure = () => action(aTypes.CREATE_ACCOUNT_FAILURE);
 
-export const cancelCreateAccount = () => action(aTypes.CANCEL_CREATE_ACCOUNT);
+export const cancelCreateAccount = () => action(aTypes.CREATE_ACCOUNT_CANCELLED);
+
+export const getAuthData = (token: string) => action(aTypes.GET_AUTH_DATA, token);
+
+export const getAuthDataSuccess = (authData: {user: User, token: string}) => action(aTypes.GET_AUTH_DATA_SUCCESS, authData);
+
+export const getAuthDataFailure = () => action(aTypes.GET_AUTH_DATA_FAILURE);
 
 export const tryLogIn = (payload: LogInPayload) => action(aTypes.TRY_LOG_IN, payload);
 

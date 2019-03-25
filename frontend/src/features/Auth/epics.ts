@@ -4,41 +4,61 @@ import { filter, mergeMap, debounceTime, map, catchError, takeUntil } from 'rxjs
 import { from, of } from 'rxjs';
 
 import { RootAction } from 'StoreTypes';
-import { CREATE_ACCOUNT, TRY_LOG_IN, CANCEL_LOG_IN, CANCEL_CREATE_ACCOUNT } from './constants';
-import { createAccountSuccess, createAccountFailure, logInFailure, logInSuccess } from './actions';
+import * as authActionsTypes from './constants';
+import * as authActions from './actions';
+import * as authGrapQL from './graph-ql';
 import { User } from 'Entities';
-import { createAccountMutation, logInMutation } from './graph-ql';
-import { setCookie } from '../../services/cookies-service';
+import { setCookie, removeCookie } from '../../services/cookies-service';
 
 import executeRequest from '../api';
 
+const aAt = authActionsTypes;
+const aA = authActions;
+const aGQ = authGrapQL;
+
 export const createAccountEpic: Epic<RootAction, RootAction> = (action$) =>
   action$.pipe(
-    filter(isOfType(CREATE_ACCOUNT)),
+    filter(isOfType(aAt.CREATE_ACCOUNT)),
     debounceTime(250),
     mergeMap(action => 
-      from(executeRequest(createAccountMutation(action.payload))).pipe(
-        map(res => createAccountSuccess()),
-        catchError((err) => of(createAccountFailure()))
+      from(executeRequest(aGQ.createAccountMutation(action.payload))).pipe(
+        map(res => aA.createAccountSuccess()),
+        catchError((err) => of(aA.createAccountFailure()))
       )
     ),
-    takeUntil(action$.pipe(ofType(CANCEL_CREATE_ACCOUNT)))
+    takeUntil(action$.pipe(ofType(aAt.CREATE_ACCOUNT_CANCELLED)))
   );
 
 export const logInEpic: Epic<RootAction, RootAction> = (action$) => 
   action$.pipe(
-    filter(isOfType(TRY_LOG_IN)),
+    filter(isOfType(aAt.TRY_LOG_IN)),
     debounceTime(250),
     mergeMap(action =>
-      from(executeRequest(logInMutation(action.payload))).pipe(
+      from(executeRequest(aGQ.logInQuery(action.payload))).pipe(
         map(res => {
           const { token, ...rest } = res;
           const user = {...rest} as User;
           setCookie('token', token, 1);
-          return logInSuccess({user, token});
+          return aA.logInSuccess({user, token});
         }),
-        catchError(() => of(logInFailure())),
+        catchError(() => of(aA.logInFailure())),
       )
     ),
-    takeUntil(action$.pipe(ofType(CANCEL_LOG_IN)))
+    takeUntil(action$.pipe(ofType(aAt.CANCEL_LOG_IN)))
+  );
+
+export const getAuthData: Epic<RootAction, RootAction> = (action$) => 
+  action$.pipe(
+    filter(isOfType(aAt.GET_AUTH_DATA)),
+    debounceTime(250),
+    mergeMap(action => {
+      const token = action.payload;
+      return from(executeRequest(aGQ.loggedUserDataQuery(), token)).pipe(
+        map(user => aA.getAuthDataSuccess({ user, token })),
+        catchError(() => {
+          removeCookie();
+          return of(aA.getAuthDataFailure());
+        })
+      )
+    })
   );

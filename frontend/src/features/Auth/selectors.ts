@@ -5,3 +5,5 @@ export const getIsCreatingAccount = ({isCreatingAccount}: AuthState) => isCreati
 export const getIsInAuthProcess = ({isInAuthProcess}: AuthState) => isInAuthProcess;
 
 export const getLoggedUser = ({loggedUser}: AuthState) => loggedUser;
+
+export const getIsGettingUserData = ({isGettingAuthData}: AuthState) => isGettingAuthData;

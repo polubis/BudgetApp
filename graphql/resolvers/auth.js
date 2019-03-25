@@ -6,6 +6,20 @@ const errorTypes = require('../errors/types/auth');
 const User = require('../../models/user');
 
 module.exports = {
+  loggedUserData: async (_, {isAuth, userId}) => {
+    try {
+      if (!isAuth) {
+        throw new Error(errorTypes.NOT_AUTHORIZED);
+      }
+
+      const userData = await User.findOne({ _id: userId });
+
+      return { ...userData._doc, _id: userData.id };
+
+    } catch(err) {
+      throw err;
+    }
+  },
   createAccount: async ({userInput}) => {
     try {
       const user = new User({
@@ -36,16 +50,16 @@ module.exports = {
   logIn: async ({logInInput}) => {
     try {
       const { username, password } = logInInput;
-      
+
       const existingUser = await User.findOne({ username });
 
       if (!existingUser) {
         throw new Error(errorTypes.INVALID_CREDENTIALS);
       }
-
-      const isEqual = await bcrypt.compare(password, existingUser.password);
       
-      if (!isEqual) {
+      const arePasswordsCorrect = await bcrypt.compare(password, existingUser.password);
+
+      if (!arePasswordsCorrect) {
         throw new Error(errorTypes.INVALID_CREDENTIALS);
       }
 
@@ -61,7 +75,8 @@ module.exports = {
         _id: existingUser._id, 
         email: existingUser.email,
         username: existingUser.username,
-        token
+        token,
+        tokenExpiration: 1
       };
     }
     catch (err) {

@@ -11,6 +11,8 @@ export type AuthState = {
   readonly isInAuthProcess: boolean;
   readonly loggedUser: User | null;
   readonly token: string;
+
+  readonly isGettingAuthData: boolean;
 }
 
 export type AuthActions = ActionType<typeof authActions>;
@@ -20,7 +22,9 @@ const initialState: AuthState = {
 
   isInAuthProcess: false,
   loggedUser: null,
-  token: ''
+  token: '',
+
+  isGettingAuthData: true
 };
 
 const actionMap: any = {
@@ -33,9 +37,10 @@ const actionMap: any = {
   [aTypes.CREATE_ACCOUNT_FAILURE]: (state: AuthState) => ({
     ...state, isCreatingAccount: false
   }),
-  [aTypes.CANCEL_CREATE_ACCOUNT]: (state: AuthState) => ({
+  [aTypes.CREATE_ACCOUNT_CANCELLED]: (state: AuthState) => ({
     ...state, isCreatingAccount: false
   }),
+  
   [aTypes.TRY_LOG_IN]: (state: AuthState) => ({
     ...state, isInAuthProcess: true
   }),
@@ -47,6 +52,13 @@ const actionMap: any = {
   }),
   [aTypes.CANCEL_LOG_IN]: (state: AuthState) => ({
     ...state, isInAuthProcess: false
+  }),
+  
+  [aTypes.GET_AUTH_DATA_SUCCESS]: (state: AuthState, { payload }: any) => ({
+    ...state, isGettingAuthData: false, loggedUser: payload.user, token: payload.token
+  }),
+  [aTypes.GET_AUTH_DATA_FAILURE]: (state: AuthState) => ({
+    ...state, isGettingAuthData: false, loggedUser: null, token: ''
   })
 };
 

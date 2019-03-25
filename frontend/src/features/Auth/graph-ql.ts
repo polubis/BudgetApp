@@ -15,10 +15,10 @@ const createAccountMutation = (payload: CreateAccountPayload): GraphQlBody<Creat
     variables: {...payload}
   });
 
-const logInMutation = (payload: LogInPayload): GraphQlBody<LogInPayload> => 
+const logInQuery = (payload: LogInPayload): GraphQlBody<LogInPayload> => 
   ({
     query: `
-      mutation LogIn($username: String!, $password: String!) {
+      query LogIn($username: String!, $password: String!) {
         logIn(logInInput: {username: $username, password: $password}) {
           _id
           username
@@ -28,9 +28,23 @@ const logInMutation = (payload: LogInPayload): GraphQlBody<LogInPayload> =>
       }
     `,
     variables: {...payload}
-  })
+  });
+
+const loggedUserDataQuery = (): GraphQlBody<undefined> => 
+  ({
+    query: `
+      query {
+        loggedUserData {
+          _id
+          username
+          email
+        }
+      }
+    `
+  });
 
 export {
   createAccountMutation,
-  logInMutation
+  logInQuery,
+  loggedUserDataQuery
 }

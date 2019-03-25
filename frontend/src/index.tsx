@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import WebFont from 'webfontloader';
+import withAuthRehydrate from './hoc/WithAuthRehydrate';
 
 import { Provider } from 'react-redux';
 
 import store from './store/index';
 
 import * as serviceWorker from './serviceWorker';
-
-// import './index';
 
 import './index.scss';
 
@@ -19,9 +18,11 @@ WebFont.load({
   }
 });
 
+const RehydratedApp = withAuthRehydrate(App);
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <RehydratedApp />
   </Provider>, 
   document.getElementById('root')
 );

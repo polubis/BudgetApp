@@ -1,6 +1,6 @@
 export type GraphQlBody<T> = {
   query: string;
-  variables: T
+  variables?: T
 }
 
 export type GrapQlResponse = {
