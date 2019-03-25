@@ -12,11 +12,9 @@ import './Home.scss';
 type State = Readonly<{ currentOpenedForm: string }>;
 
 class Home extends React.Component<any, State> {
-  readonly state: State = { currentOpenedForm: 'login' };
+  state: State = { currentOpenedForm: '' };
 
-  _togleAuth = (formName: string): void => {
-    this.setState({currentOpenedForm: formName});
-  }
+  _togleAuth = (formName: string): void => this.setState({currentOpenedForm: formName});
 
   render() {
     const { currentOpenedForm } = this.state;

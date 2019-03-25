@@ -23,10 +23,6 @@ const Main = Loadable({
 
 class App extends Component<AppProps, any> {
 
-  componentDidMount() {
-    
-  }
-
   renderContent = () => this.props.loggedUser ? <Main /> : <Home />;
 
   render() {
