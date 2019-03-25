@@ -9,6 +9,8 @@ import store from './store/index';
 
 import * as serviceWorker from './serviceWorker';
 
+// import './index';
+
 import './index.scss';
 
 WebFont.load({

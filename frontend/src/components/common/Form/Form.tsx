@@ -1,6 +1,7 @@
-import React, { createContext } from 'react'
+import React from 'react'
 
 import { FormSettings, FormValues, TemplateViewProps } from 'FormTypes';
+import { Provider } from './context';
 
 import FormManager from './FormManager/FormManager';
 import FormTemplate from './FormTemplate/FormTemplate';
@@ -11,39 +12,28 @@ type Props = {
   isOnSubmit?: boolean;
 }
 
-export type FormContext = {
-  currentFocusedInput: string;
-  changeFocusedInput: (key: string) => void;
-}
-
-export const { Provider, Consumer } = createContext({
-  currentFocusedInput: '',
-  changeFocusedInput: (key: string) => {}
-});
-
 export const Form = ({settings, actionAfterSubmit, isOnSubmit, ...rest}: Props & TemplateViewProps) => (
+
   <FormManager settings={settings} actionAfterSubmit={actionAfterSubmit}>
 
-    {(isFormDirty, isFormValid, currentFocusedInput, values, errors, handleTyping, handleSubmit, changeFocusedInput) => (
+    {({currentFocusedInput, ...restState}, handleTyping, handleSubmit, changeFocusedInput) => (
     <Provider value={{
       currentFocusedInput: currentFocusedInput,
-      changeFocusedInput: changeFocusedInput
+      changeFocusedInput: changeFocusedInput,
+      handleTyping: handleTyping
     }}>
       <FormTemplate 
         {...rest}
-        isFormDirty={isFormDirty}
-        isFormValid={isFormValid}
-        values={values}
-        errors={errors}
+        {...restState}
         settings={settings}
         onSubmit={handleSubmit}
-        handleTyping={handleTyping}
         isOnSubmit={isOnSubmit}
       />
     </Provider>
     )}
 
   </FormManager>
+
 );
 
 export default Form;

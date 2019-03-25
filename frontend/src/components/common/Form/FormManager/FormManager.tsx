@@ -1,41 +1,29 @@
 import React, { FormEvent } from 'react';
 
-import { FormSettings, FormValues, FormErrors } from 'FormTypes';
+import { IFormManager, FormSettings, FormValues, FormErrors } from 'FormTypes';
 import { initializeState, modifyFormError, modifyFormErrors } from '../helpers';
-
-type State = {
-  values: FormValues;
-  errors: FormErrors;
-  isFormDirty: boolean;
-  isFormValid: boolean;
-  currentFocusedInput: string;
-}
 
 type Props = {
   settings: FormSettings;
   actionAfterSubmit: (values: FormValues) => void;
   children: (
-    isFormDirty: boolean,
-    isFormValid: boolean,
-    currentFocusedInput: string,
-    values: FormValues,
-    errors: FormErrors,
+    injectedState: IFormManager,
     handleTyping: (key: string, value: any) => void,
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void,
     changeFocusedInput: (key: string) => void
-  ) => import('react').ReactNode;
+  ) => React.ReactNode;
 }
 
-const getInitialState = (settings: FormSettings): State => ({
+const getInitialState = (settings: FormSettings): IFormManager => ({
   isFormDirty: false,
   isFormValid: true,
   currentFocusedInput: '',
   ...initializeState(settings)
 });
 
-class FormManager extends React.Component<Props, State> {
+class FormManager extends React.Component<Props, IFormManager> {
 
-  state: State = getInitialState(this.props.settings);
+  state: IFormManager = getInitialState(this.props.settings);
 
   changeFocusedInput = (key: string): void => this.setState({currentFocusedInput: key});
 
@@ -59,27 +47,24 @@ class FormManager extends React.Component<Props, State> {
 
   handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { areValuesValid, errors } = modifyFormErrors(
+    const { errorOccuredIn, errors } = modifyFormErrors(
       this.state.values, 
       this.state.errors,
       this.props.settings
     );
 
-    if (areValuesValid) {
+    const isFormValid = !errorOccuredIn;
+
+    if (isFormValid) {
       this.props.actionAfterSubmit(this.state.values);
     }
 
-    this.setState({errors, isFormDirty: true, isFormValid: areValuesValid});
+    this.setState({errors, isFormDirty: true, isFormValid, currentFocusedInput: errorOccuredIn});
   }
 
   render() {
-    const { values, errors, currentFocusedInput, isFormDirty, isFormValid } = this.state;
     return this.props.children(
-      isFormDirty,
-      isFormValid,
-      currentFocusedInput,
-      values, 
-      errors,
+      this.state,
       this.handleTyping, 
       this.handleSubmit,
       this.changeFocusedInput

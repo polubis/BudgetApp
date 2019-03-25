@@ -15,11 +15,10 @@ type Props = {
   values: FormValues;
   errors: FormErrors;
   settings: FormSettings;
-  handleTyping: (key: string, e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 }
 
-const FormTemplate = ({isFormValid, isFormDirty, values, errors, handleTyping, settings, 
+const FormTemplate = ({isFormValid, isFormDirty, values, errors, settings, 
   onSubmit, btnTitle, btnClasses, formClass, isOnSubmit}: Props & TemplateViewProps) => {
 
   return (
@@ -34,7 +33,6 @@ const FormTemplate = ({isFormValid, isFormDirty, values, errors, handleTyping, s
             value={values[key]}
             errorsOccured={errors[key].errorsOccured}
             validationResult={errors[key].validationResult}
-            handleTyping={e => handleTyping(key, e)}
           />
         ))}
       </div>

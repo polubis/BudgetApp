@@ -4,12 +4,11 @@ import MaterialIcon from '@material/react-material-icon';
 import ValidationErrors from './ValidationErrors/ValidationErrors';
 
 import { FormAppearanceSetting, ValidationResult } from 'FormTypes';
-import { Consumer, FormContext } from '../../Form';
+import { Consumer, FormContext } from '../../context';
 
 import './FormGroup.scss';
 
 type Props = {
-  handleTyping: (e: React.ChangeEvent<HTMLInputElement>) => void;
   id: string;
   value: any;
   errorsOccured?: boolean | null;
@@ -32,45 +31,45 @@ class FormGroup extends Component<Props & FormAppearanceSetting, any> {
   }
 
   render() {
-    const { id, value, errorsOccured, validationResult, handleTyping, icon, title, placeholder } = this.props;
-    
+    const { id, value, errorsOccured, validationResult, icon, title, placeholder } = this.props;
     return (
-    <Consumer>
-      {({currentFocusedInput, changeFocusedInput}: FormContext) => (
-        <section id={id} className='form-group'>
-          <label htmlFor={title} className='form-group__label'>{title}</label>
+      <Consumer>
+        {({currentFocusedInput, changeFocusedInput, handleTyping}: FormContext) => (
+          <section id={id} className='form-group'>
+            <label htmlFor={title} className='form-group__label'>{title}</label>
 
-          <div className={`form-group__content ${this.selectGroupClassByErrorsOccured()}`}>
-            <input 
-              autoComplete='off'
-              id={title}
-              value={value}
-              className='content__item'
-              onChange={handleTyping}
-              onFocus={() => changeFocusedInput(id)}
-              onBlur={() => changeFocusedInput('')}
-              type='text' 
-              placeholder={placeholder || 'type your ' + title + '...'} 
-            />
+            <div className={`form-group__content ${this.selectGroupClassByErrorsOccured()}`}>
 
-            {icon && 
-              <div className='content__rect row-c-c'>
-                <MaterialIcon icon={icon} />
-              </div>
-            }
-
-            {(errorsOccured && currentFocusedInput === id) && 
-              <ValidationErrors 
-                closeValidationErrors={() => changeFocusedInput('')}
-                validationResult={validationResult}
+              <input 
+                autoComplete='off'
+                id={title}
+                value={value}
+                className='content__item'
+                onChange={e => handleTyping(id, e)}
+                onFocus={() => changeFocusedInput(id)}
+                onBlur={() => changeFocusedInput('')}
+                type='text' 
+                placeholder={placeholder || 'type your ' + title + '...'} 
               />
-            }
 
-          </div>
+              {icon && 
+                <div className='content__rect row-c-c'>
+                  <MaterialIcon icon={icon} />
+                </div>
+              }
 
-        </section>
-      )}
-    </Consumer>
+              {(errorsOccured && currentFocusedInput === id) && 
+                <ValidationErrors 
+                  closeValidationErrors={() => changeFocusedInput('')}
+                  validationResult={validationResult}
+                />
+              }
+
+            </div>
+
+          </section>
+        )}
+      </Consumer>
     );
   }
 }

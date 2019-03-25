@@ -38,19 +38,19 @@ export const modifyFormError = (value: any, title: string, validators: Validator
 } 
 
 export const modifyFormErrors = (curValues: FormValues, currErrors: FormErrors, formSettings: FormSettings): 
-  {areValuesValid: boolean, errors: FormErrors} => {
+  {errorOccuredIn: string, errors: FormErrors} => {
   const errors: FormErrors = {};
-  let areValuesValid = true;
+  let errorOccuredIn = '';
 
   Object.keys(curValues).forEach(key => {
     const { validators } = formSettings[key].logic;
     errors[key] = validators ? 
       modifyFormError(curValues[key], formSettings[key].appearance.title, validators) : currErrors[key];
       
-    if (errors[key].errorsOccured) {
-      areValuesValid = false;
+    if (errors[key].errorsOccured && !errorOccuredIn) {
+      errorOccuredIn = key;
     }
   });
 
-  return { areValuesValid, errors };
+  return { errorOccuredIn, errors };
 }

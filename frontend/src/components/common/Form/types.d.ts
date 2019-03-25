@@ -1,4 +1,12 @@
 declare module 'FormTypes' {
+  export interface IFormManager {
+    values: FormValues;
+    errors: FormErrors;
+    isFormDirty: boolean;
+    isFormValid: boolean;
+    currentFocusedInput: string;
+  }
+  
   export type FormSettings = {
     [key: string] : FormSetting;
   }
