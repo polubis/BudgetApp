@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import MaterialIcon from '@material/react-material-icon';
 import ValidationErrors from './ValidationErrors/ValidationErrors';
@@ -15,63 +15,54 @@ type Props = {
   validationResult: ValidationResult;
 }
 
-class FormGroup extends Component<Props & FormAppearanceSetting, any> {
+const selectGroupClassByErrorsOccured = (errorsOccured?: boolean | null) => 
+  errorsOccured === null ? 'form-group__content--initial' 
+    : errorsOccured ? 'form-group__content--error' : 'form-group__content--ok';
 
-  shouldComponentUpdate({value, validationResult}: Props & FormAppearanceSetting) {
-    if (value !== this.props.value || validationResult !== this.props.validationResult) {
-      return true;
-    }
-    return false;
-  }
 
-  selectGroupClassByErrorsOccured = (): string => {
-    const { errorsOccured } = this.props;
-    return errorsOccured === null ? 'form-group__content--initial' 
-      : errorsOccured ? 'form-group__content--error' : 'form-group__content--ok';
-  }
+const FormGroup = ({id, value, errorsOccured, validationResult, icon, title, placeholder}: Props & FormAppearanceSetting) => {
 
-  render() {
-    const { id, value, errorsOccured, validationResult, icon, title, placeholder } = this.props;
-    return (
-      <Consumer>
-        {({currentFocusedInput, changeFocusedInput, handleTyping}: FormContext) => (
-          <section id={id} className='form-group'>
-            <label htmlFor={title} className='form-group__label'>{title}</label>
+  const contentClass = selectGroupClassByErrorsOccured(errorsOccured);
 
-            <div className={`form-group__content ${this.selectGroupClassByErrorsOccured()}`}>
+  return (
+    <Consumer>
+      {({currentFocusedInput, changeFocusedInput, handleTyping}: FormContext) => (
+        <section id={id} className='form-group'>
+          <label htmlFor={title} className='form-group__label'>{title}</label>
 
-              <input 
-                autoComplete='off'
-                id={title}
-                value={value}
-                className='content__item'
-                onChange={e => handleTyping(id, e)}
-                onFocus={() => changeFocusedInput(id)}
-                onBlur={() => changeFocusedInput('')}
-                type='text' 
-                placeholder={placeholder || 'type your ' + title + '...'} 
+          <div className={`form-group__content ${contentClass}`}>
+
+            <input 
+              autoComplete='off'
+              id={title}
+              value={value}
+              className='content__item'
+              onChange={e => handleTyping(id, e)}
+              onFocus={() => changeFocusedInput(id)}
+              onBlur={() => changeFocusedInput('')}
+              type='text' 
+              placeholder={placeholder || 'type your ' + title + '...'} 
+            />
+
+            {icon && 
+              <div className='content__rect row-c-c'>
+                <MaterialIcon icon={icon} />
+              </div>
+            }
+
+            {(errorsOccured && currentFocusedInput === id) && 
+              <ValidationErrors 
+                closeValidationErrors={() => changeFocusedInput('')}
+                validationResult={validationResult}
               />
+            }
 
-              {icon && 
-                <div className='content__rect row-c-c'>
-                  <MaterialIcon icon={icon} />
-                </div>
-              }
+          </div>
 
-              {(errorsOccured && currentFocusedInput === id) && 
-                <ValidationErrors 
-                  closeValidationErrors={() => changeFocusedInput('')}
-                  validationResult={validationResult}
-                />
-              }
-
-            </div>
-
-          </section>
-        )}
-      </Consumer>
-    );
-  }
+        </section>
+      )}
+    </Consumer>
+  );
 }
 
 export default FormGroup;
