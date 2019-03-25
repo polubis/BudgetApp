@@ -20,8 +20,11 @@ declare module 'FormTypes' {
     title: string;
     placeholder?: string;
     icon?: string;
+    inputSettings?: {
+      type: string;
+    };
   }
-  
+
   export type FormLogicSetting = {
     value: any;
     validators?: Validators

@@ -19,34 +19,32 @@ type Props = {
 }
 
 const FormTemplate = ({isFormValid, isFormDirty, values, errors, settings, 
-  onSubmit, btnTitle, btnClasses, formClass, isOnSubmit}: Props & TemplateViewProps) => {
+  onSubmit, btnTitle, btnClasses, formClass, isOnSubmit}: Props & TemplateViewProps) => (
+    
+  <form className={formClass} onSubmit={onSubmit}>
 
-  return (
-    <form className={formClass} onSubmit={onSubmit}>
+    <div className='form-content'>
+      {Object.keys(settings).map(key => (
+        <FormGroup 
+          {...settings[key].appearance}
+          key={key}
+          id={key}
+          value={values[key]}
+          errorsOccured={errors[key].errorsOccured}
+          validationResult={errors[key].validationResult}
+        />
+      ))}
+    </div>
 
-      <div className='form-content'>
-        {Object.keys(settings).map(key => (
-          <FormGroup 
-            {...settings[key].appearance}
-            key={key}
-            id={key}
-            value={values[key]}
-            errorsOccured={errors[key].errorsOccured}
-            validationResult={errors[key].validationResult}
-          />
-        ))}
-      </div>
+    <Button 
+      disabled={isFormDirty && !isFormValid}
+      showLoader={isOnSubmit}
+      classes={btnClasses}
+      title={btnTitle}
+      action={onSubmit}
+    />
 
-      <Button 
-        disabled={isFormDirty && !isFormValid}
-        showLoader={isOnSubmit}
-        classes={btnClasses}
-        title={btnTitle}
-        action={onSubmit}
-      />
-
-    </form>
-  );
-}
+  </form>
+)
 
 export default FormTemplate;

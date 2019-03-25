@@ -6,7 +6,7 @@ export default {
     logic: {value: '', validators: { required: true, minLength: 3, maxLength: 25 }}
   },
   password: {
-    appearance: {title: 'password', icon: 'lock'},
+    appearance: {title: 'password', icon: 'lock', inputSettings: { type: 'password' }},
     logic: {value: '', validators: { required: true, minLength: 5, maxLength: 25 } }
   }
 } as FormSettings;

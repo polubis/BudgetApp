@@ -17,6 +17,7 @@ const getCompletedCount = (keys: string[], validationResult: ValidationResult): 
   keys.filter(key => !validationResult[key].isError).length;
 
 const ValidationErrors = ({validationResult, closeValidationErrors}: Props) => {
+  
   const keys: string[] = Object.keys(validationResult);
 
   return (

@@ -19,8 +19,7 @@ const selectGroupClassByErrorsOccured = (errorsOccured?: boolean | null) =>
   errorsOccured === null ? 'form-group__content--initial' 
     : errorsOccured ? 'form-group__content--error' : 'form-group__content--ok';
 
-
-const FormGroup = ({id, value, errorsOccured, validationResult, icon, title, placeholder}: Props & FormAppearanceSetting) => {
+const FormGroup = ({id, value, errorsOccured, validationResult, icon, title, placeholder, inputSettings}: Props & FormAppearanceSetting) => {
 
   const contentClass = selectGroupClassByErrorsOccured(errorsOccured);
 
@@ -33,15 +32,15 @@ const FormGroup = ({id, value, errorsOccured, validationResult, icon, title, pla
           <div className={`form-group__content ${contentClass}`}>
 
             <input 
-              autoComplete='off'
-              id={title}
-              value={value}
               className='content__item'
+              id={title}
+              autoComplete='off'
+              placeholder={placeholder || 'type your ' + title + '...'} 
+              {...inputSettings}
+              value={value}
               onChange={e => handleTyping(id, e)}
               onFocus={() => changeFocusedInput(id)}
               onBlur={() => changeFocusedInput('')}
-              type='text' 
-              placeholder={placeholder || 'type your ' + title + '...'} 
             />
 
             {icon && 
