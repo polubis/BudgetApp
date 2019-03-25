@@ -41,7 +41,7 @@ const actionMap: any = {
     ...state, isCreatingAccount: false
   }),
   
-  [aTypes.TRY_LOG_IN]: (state: AuthState) => ({
+  [aTypes.LOG_IN]: (state: AuthState) => ({
     ...state, isInAuthProcess: true
   }),
   [aTypes.LOG_IN_SUCCESS]: (state: AuthState, { payload }: any) => ({
@@ -50,7 +50,7 @@ const actionMap: any = {
   [aTypes.LOG_IN_FAILURE]: (state: AuthState) => ({
     ...state, isInAuthProcess: false
   }),
-  [aTypes.CANCEL_LOG_IN]: (state: AuthState) => ({
+  [aTypes.LOG_IN_CANCELLED]: (state: AuthState) => ({
     ...state, isInAuthProcess: false
   }),
   

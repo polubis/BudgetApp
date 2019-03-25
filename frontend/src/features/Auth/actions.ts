@@ -19,10 +19,10 @@ export const getAuthDataSuccess = (authData: {user: User, token: string}) => act
 
 export const getAuthDataFailure = () => action(aTypes.GET_AUTH_DATA_FAILURE);
 
-export const tryLogIn = (payload: LogInPayload) => action(aTypes.TRY_LOG_IN, payload);
+export const tryLogIn = (payload: LogInPayload) => action(aTypes.LOG_IN, payload);
 
 export const logInSuccess = (payload: {user: User, token: string}) => action(aTypes.LOG_IN_SUCCESS, payload);
 
 export const logInFailure = () => action(aTypes.LOG_IN_FAILURE);
 
-export const cancelLogIn = () => action(aTypes.CANCEL_LOG_IN);
+export const cancelLogIn = () => action(aTypes.LOG_IN_CANCELLED);

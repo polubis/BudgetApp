@@ -4,10 +4,10 @@ export const CREATE_ACCOUNT_FAILURE = `${CREATE_ACCOUNT}_FAILURE`;
 export const CREATE_ACCOUNT_CANCELLED = `${CREATE_ACCOUNT}_CANCELLED`;
 
 export const GET_AUTH_DATA = '[Auth] GET_AUTH_DATA';
-export const GET_AUTH_DATA_SUCCESS = '[Auth] GET_AUTH_DATA_SUCCESS';
-export const GET_AUTH_DATA_FAILURE = '[Auth] GET_AUTH_DATA_FAILURE';
+export const GET_AUTH_DATA_SUCCESS = `${GET_AUTH_DATA}_SUCCESS`;
+export const GET_AUTH_DATA_FAILURE = `${GET_AUTH_DATA}_FAILURE`;
 
-export const TRY_LOG_IN = '[Auth] TRY_LOG_IN';
-export const LOG_IN_SUCCESS = '[Auth] LOG_IN_SUCCESS';
-export const LOG_IN_FAILURE = '[Auth] LOG_IN_FAILURE';
-export const CANCEL_LOG_IN = '[Auth] CANCEL_LOG_IN';
+export const LOG_IN = '[Auth] LOG_IN';
+export const LOG_IN_SUCCESS = `${LOG_IN}_SUCCESS`;
+export const LOG_IN_FAILURE = `${LOG_IN}_FAILURE`;
+export const LOG_IN_CANCELLED = `${LOG_IN}_CANCELLED`;

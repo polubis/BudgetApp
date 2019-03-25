@@ -37,6 +37,7 @@ module.exports = {
       }
 
       const hashedPassword = await bcrypt.hash(user.password, 12);
+      
       user.password = hashedPassword;
 
       const result = await user.save();

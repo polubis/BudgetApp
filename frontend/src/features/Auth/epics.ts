@@ -31,7 +31,7 @@ export const createAccountEpic: Epic<RootAction, RootAction> = (action$) =>
 
 export const logInEpic: Epic<RootAction, RootAction> = (action$) => 
   action$.pipe(
-    filter(isOfType(aAt.TRY_LOG_IN)),
+    filter(isOfType(aAt.LOG_IN)),
     debounceTime(250),
     mergeMap(action =>
       from(executeRequest(aGQ.logInQuery(action.payload))).pipe(
@@ -44,7 +44,7 @@ export const logInEpic: Epic<RootAction, RootAction> = (action$) =>
         catchError(() => of(aA.logInFailure())),
       )
     ),
-    takeUntil(action$.pipe(ofType(aAt.CANCEL_LOG_IN)))
+    takeUntil(action$.pipe(ofType(aAt.LOG_IN_CANCELLED)))
   );
 
 export const getAuthData: Epic<RootAction, RootAction> = (action$) => 
