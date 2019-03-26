@@ -2,7 +2,7 @@ import axios, { AxiosPromise, AxiosResponse } from 'axios';
 import store from '../store/index';
 import { alertsDefinitions } from './Alerts/alerts-definitions';
 
-import { tryAddAlert } from './Alerts/actions';
+import { addAlert } from './Alerts/actions';
 import { AlertDefinition, AlertsMetaData } from './Alerts/models';
 import { GraphQlBody, GrapQlResponse } from './models';
 
@@ -52,7 +52,8 @@ const manageAlertsMetaData = ({data, errors}: GrapQlResponse, onErrorsOccured: a
 }
 
 const handleAddNewAlert = (alert: AlertDefinition): void => {
-  store.dispatch(tryAddAlert(alert));
+  console.log(alert);
+  store.dispatch(addAlert(alert));
 }
 
 const prepareRequest = <T>(body: GraphQlBody<T>, token?: string): AxiosPromise<T> => {

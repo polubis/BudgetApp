@@ -2,8 +2,10 @@ import { ActionType } from 'typesafe-actions';
 import { combineReducers } from 'redux';
 
 import * as authActions from './actions';
-import { ADD_ALERT, REMOVE_ALERT, CLEAR_ALERTS } from './constants';
+import * as alertsActionsTypes from './constants';
 import { AlertDefinition } from './models';
+
+const aT = alertsActionsTypes;
 
 export type AlertsState = {
   readonly alerts: AlertDefinition[];
@@ -16,21 +18,16 @@ const initialState: AlertsState = {
 };
 
 const actionMap: any = {
-  [ADD_ALERT]: (state: AlertsState, alert: AlertDefinition) => 
+  [aT.PUSH_ALERT]: (state: AlertsState, alert: AlertDefinition) => 
   ({
-    ...state, 
-    alerts: [
-      ...state.alerts, alert
-    ]
+    ...state, alerts: [...state.alerts, alert]
   }),
-  [REMOVE_ALERT]: (state: AlertsState, alertId: string) => 
+  [aT.REMOVE_ALERT]: (state: AlertsState, alertId: string) => 
   ({
-    ...state,
-    alerts: state.alerts.filter(({id}) => id !== alertId)
+    ...state, alerts: state.alerts.filter(({id}) => id !== alertId)
   }),
-  [CLEAR_ALERTS]: (state: AlertsState) => ({
-    ...state,
-    alerts: []
+  [aT.CLEAR_ALERTS]: (state: AlertsState) => ({
+    ...state, alerts: []
   })
 };
 
