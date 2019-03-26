@@ -10,14 +10,16 @@ const isAuth = require('./middleware/is-auth');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/BudgetApp')
-  .then(() => {
-    console.log("Connected to database!");
-  })
-  .catch(() => {
-    console.log("Connection failed!");
-  });
+const connectToDb = async () => {
+  try {
+    await mongoose.connect('mongodb://localhost:27017/BudgetApp');
+  }
+  catch(err) {
+    process.exit(1);
+  }
+}
 
+connectToDb();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
