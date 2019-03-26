@@ -39,9 +39,6 @@ class App extends Component<AppProps, any> {
   }
 }
 
-const mapStateToProps = (state: StoreTypes.RootState) => ({
+export default connect((state: StoreTypes.RootState) => ({
   loggedUser: getLoggedUser(state.auth.authReducer)
-});
-
-
-export default connect(mapStateToProps, null)(App);
+}), null)(App);
