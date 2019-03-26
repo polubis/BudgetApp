@@ -26,7 +26,7 @@ export const createAccountEpic: Epic<RootAction, RootAction> = (action$) =>
         catchError((err) => of(aA.createAccountFailure()))
       )
     ),
-    takeUntil(action$.pipe(ofType(aAt.CREATE_ACCOUNT_CANCELLED)))
+    takeUntil(action$.pipe(ofType(aAt.AUTH_CANCELLED)))
   );
 
 export const logInEpic: Epic<RootAction, RootAction> = (action$) => 
@@ -44,7 +44,7 @@ export const logInEpic: Epic<RootAction, RootAction> = (action$) =>
         catchError(() => of(aA.logInFailure())),
       )
     ),
-    takeUntil(action$.pipe(ofType(aAt.LOG_IN_CANCELLED)))
+    takeUntil(action$.pipe(ofType(aAt.AUTH_CANCELLED)))
   );
 
 export const getAuthData: Epic<RootAction, RootAction> = (action$) => 

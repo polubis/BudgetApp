@@ -2,7 +2,7 @@ import StoreTypes from 'StoreTypes';
 import { connect } from 'react-redux';
 import { Dispatch, bindActionCreators } from 'redux';
 
-import { tryLogIn, cancelLogIn } from '../../../features/Auth/actions';
+import { logIn, authCancelled } from '../../../features/Auth/actions';
 import { getIsInAuthProcess } from '../../../features/Auth/selectors';
 import { LogInPayload } from '../../../features/Auth/models';
 
@@ -13,8 +13,8 @@ export interface ILogin {
 }
 
 export interface ILoginMethods {
-  tryLogIn: (values: LogInPayload) => void;
-  cancelLogIn: () => void;
+  logIn: (values: LogInPayload) => void;
+  authCancelled: () => void;
 }
 
 const mapStateToProps = (state: StoreTypes.RootState): ILogin => ({
@@ -24,8 +24,8 @@ const mapStateToProps = (state: StoreTypes.RootState): ILogin => ({
 const mapDispatchToProps = (dispatch: Dispatch<StoreTypes.RootAction>): ILoginMethods => 
   bindActionCreators(
     {
-      tryLogIn,
-      cancelLogIn
+      logIn,
+      authCancelled
     }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

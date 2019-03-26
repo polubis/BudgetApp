@@ -10,10 +10,10 @@ import { ILogin, ILoginMethods } from './index';
 
 import './Login.scss';
 
-const Login = ({isInAuthProcess, tryLogIn, cancelLogIn}: ILogin & ILoginMethods) => {
+const Login = ({isInAuthProcess, logIn, authCancelled}: ILogin & ILoginMethods) => {
 
   useEffect(() => {
-    return () => cancelLogIn();
+    return () => authCancelled();
   }, []);
 
   return (
@@ -22,7 +22,7 @@ const Login = ({isInAuthProcess, tryLogIn, cancelLogIn}: ILogin & ILoginMethods)
         btnTitle='Log in'
         btnClasses='bg-btn bg-btn--main btn--medium login-btn'
         settings={LoginFormSettings}
-        actionAfterSubmit={values => tryLogIn(values as LogInPayload)}
+        actionAfterSubmit={values => logIn(values as LogInPayload)}
         isOnSubmit={isInAuthProcess}
       />
 

@@ -1,13 +1,15 @@
 export const CREATE_ACCOUNT = `[Auth] CREATE_ACCOUNT`;
 export const CREATE_ACCOUNT_SUCCESS = `${CREATE_ACCOUNT}_SUCCESS`;
 export const CREATE_ACCOUNT_FAILURE = `${CREATE_ACCOUNT}_FAILURE`;
-export const CREATE_ACCOUNT_CANCELLED = `${CREATE_ACCOUNT}_CANCELLED`;
+
+export const LOG_IN = '[Auth] LOG_IN';
+export const LOG_IN_SUCCESS = `${LOG_IN}_SUCCESS`;
+export const LOG_IN_FAILURE = `${LOG_IN}_FAILURE`;
+
+export const AUTH_CANCELLED = '[Auth] AUTH_CANCELLED';
 
 export const GET_AUTH_DATA = '[Auth] GET_AUTH_DATA';
 export const GET_AUTH_DATA_SUCCESS = `${GET_AUTH_DATA}_SUCCESS`;
 export const GET_AUTH_DATA_FAILURE = `${GET_AUTH_DATA}_FAILURE`;
 
-export const LOG_IN = '[Auth] LOG_IN';
-export const LOG_IN_SUCCESS = `${LOG_IN}_SUCCESS`;
-export const LOG_IN_FAILURE = `${LOG_IN}_FAILURE`;
-export const LOG_IN_CANCELLED = `${LOG_IN}_CANCELLED`;
+

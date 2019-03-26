@@ -37,9 +37,7 @@ const actionMap: any = {
   [aTypes.CREATE_ACCOUNT_FAILURE]: (state: AuthState) => ({
     ...state, isCreatingAccount: false
   }),
-  [aTypes.CREATE_ACCOUNT_CANCELLED]: (state: AuthState) => ({
-    ...state, isCreatingAccount: false
-  }),
+
   
   [aTypes.LOG_IN]: (state: AuthState) => ({
     ...state, isInAuthProcess: true
@@ -50,8 +48,9 @@ const actionMap: any = {
   [aTypes.LOG_IN_FAILURE]: (state: AuthState) => ({
     ...state, isInAuthProcess: false
   }),
-  [aTypes.LOG_IN_CANCELLED]: (state: AuthState) => ({
-    ...state, isInAuthProcess: false
+
+  [aTypes.AUTH_CANCELLED]: (state: AuthState) => ({
+    ...state, isCreatingAccount: false, isInAuthProcess: false
   }),
   
   [aTypes.GET_AUTH_DATA_SUCCESS]: (state: AuthState, { payload }: any) => ({

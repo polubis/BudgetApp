@@ -8,10 +8,10 @@ import { IRegister, IRegisterMethods } from './index';
 
 import './Register.scss';
 
-const Register = ({createAccount, isCreatingAccount, cancelCreateAccount}: IRegister & IRegisterMethods) => {
+const Register = ({createAccount, isCreatingAccount, authCancelled}: IRegister & IRegisterMethods) => {
 
   useEffect(() => {
-    return () => cancelCreateAccount();
+    return () => authCancelled();
   }, []);
 
   return (
