@@ -23,10 +23,10 @@ export const createAccountEpic: Epic<RootAction, RootAction> = (action$) =>
     mergeMap(action => 
       from(executeRequest(aGQ.createAccountMutation(action.payload))).pipe(
         map(res => aA.createAccountSuccess()),
-        catchError((err) => of(aA.createAccountFailure()))
+        catchError((err) => of(aA.createAccountFailure())),
+        takeUntil(action$.pipe(ofType(aAt.AUTH_CANCELLED)))
       )
-    ),
-    takeUntil(action$.pipe(ofType(aAt.AUTH_CANCELLED)))
+    )
   );
 
 export const logInEpic: Epic<RootAction, RootAction> = (action$) => 
@@ -42,9 +42,9 @@ export const logInEpic: Epic<RootAction, RootAction> = (action$) =>
           return aA.logInSuccess({user, token});
         }),
         catchError(() => of(aA.logInFailure())),
-      )
-    ),
-    takeUntil(action$.pipe(ofType(aAt.AUTH_CANCELLED)))
+        takeUntil(action$.pipe(ofType(aAt.AUTH_CANCELLED)))
+      ),
+    )
   );
 
 export const getAuthData: Epic<RootAction, RootAction> = (action$) => 
