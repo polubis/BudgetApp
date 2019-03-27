@@ -1,5 +1,5 @@
 import { CreateAccountPayload, LogInPayload } from './models';
-import { GraphQlBody } from '../models';
+import { GraphQlBody } from '../../api/models';
 
 const createAccountMutation = (payload: CreateAccountPayload): GraphQlBody<CreateAccountPayload> => 
   ({

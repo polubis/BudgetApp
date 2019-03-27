@@ -10,7 +10,7 @@ import * as authGrapQL from './graph-ql';
 import { User } from 'Entities';
 import { setCookie, removeCookie } from '../../services/cookies-service';
 
-import executeRequest from '../api';
+import executeRequest from '../../api';
 
 const aAt = authActionsTypes;
 const aA = authActions;

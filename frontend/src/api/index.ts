@@ -1,9 +1,9 @@
 import axios, { AxiosPromise, AxiosResponse } from 'axios';
 import store from '../store/index';
-import { alertsDefinitions } from './Alerts/alerts-definitions';
+import { alertsDefinitions } from '../features/Alerts/alerts-definitions';
 
-import { addAlert } from './Alerts/actions';
-import { AlertDefinition, AlertsMetaData } from './Alerts/models';
+import { addAlert } from '../features/Alerts/actions';
+import { AlertDefinition, AlertsMetaData } from '../features/Alerts/models';
 import { GraphQlBody, GrapQlResponse } from './models';
 
 const errorsBlackObject: {[key: string]: string} = {
@@ -52,7 +52,6 @@ const manageAlertsMetaData = ({data, errors}: GrapQlResponse, onErrorsOccured: a
 }
 
 const handleAddNewAlert = (alert: AlertDefinition): void => {
-  console.log(alert);
   store.dispatch(addAlert(alert));
 }
 
