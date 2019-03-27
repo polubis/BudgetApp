@@ -3,26 +3,16 @@ import React from 'react';
 import Modal from '../../components/common/Modal/Modal';
 import AuthHeader from '../../components/auth/AuthHeader/AuthHeader';
 import Commercial from '../../components/auth/Commercial/Commercial';
-import Spinner from '../../components/ui/Spinner/Spinner';
+import WithLazyLoading from '../../hoc/WithLazyLoading';
 
 import LaptoptImg from './assets/laptop.jpg';
 import LaptopStatsImg from './assets/laptop-stats.jpg';
 
-import Loadable from 'react-loadable';
-
 import './Auth.scss';
 
-const Login = Loadable({
-  loader: () => import('./Login/index'),
-  loading: Spinner,
-  delay: 2000
-});
+const Login = WithLazyLoading(() => import('./Login/index'));
 
-const Register = Loadable({
-  loader: () => import('./Register/index'),
-  loading: Spinner,
-  delay: 2000
-});
+const Register = WithLazyLoading(() => import('./Register/index'));
 
 type AuthProps = {
   close(): void;

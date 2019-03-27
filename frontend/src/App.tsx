@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Loadable from 'react-loadable';
 
 import StoreTypes from 'StoreTypes';
 import { getLoggedUser } from './features/Auth/selectors';
 import { User } from 'Entities';
 
 import Home from './pages/Home/Home';
-import Spinner from './components/ui/Spinner/Spinner';
 import Alerts from './components/common/Alerts/Alerts';
+import WithLazyLoading from './hoc/WithLazyLoading';
+
+const Main = WithLazyLoading(() => import('./pages/Main/Main'));
 
 type AppProps = {
   loggedUser: User | null;
 }
-
-const Main = Loadable({
-  loader: () => import('./pages/Main/Main'),
-  loading: Spinner,
-  delay: 2000
-});
 
 class App extends Component<AppProps, any> {
 
