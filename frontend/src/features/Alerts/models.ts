@@ -10,8 +10,3 @@ export class AlertDefinition {
   constructor(public id: string, public message: string, public type: Error | Warn | Ok, public closeTime: number = 5000) {
   }
 }
-
-export class AlertsMetaData {
-  constructor(public alert?: AlertDefinition | null, public showMessageOnError: boolean = true) {
-  }
-}

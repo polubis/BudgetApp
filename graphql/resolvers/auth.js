@@ -25,9 +25,8 @@ module.exports = {
       const user = new User({
         ...userInput
       });
-
       await handleValidation(user);
-      
+
       const existingUser = await User.findOne(
         { $or:[ { username: user.username }, { email: user.email } ] }
       );

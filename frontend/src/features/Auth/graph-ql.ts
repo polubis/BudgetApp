@@ -12,7 +12,7 @@ const createAccountMutation = (payload: CreateAccountPayload): GraphQlBody<Creat
         }
       }
     `,
-    variables: {...payload}
+    variables: {username: payload.username, email: payload.email, password: payload.password}
   });
 
 const logInQuery = (payload: LogInPayload): GraphQlBody<LogInPayload> => 
