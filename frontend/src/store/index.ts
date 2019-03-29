@@ -4,6 +4,7 @@ import { createStore, applyMiddleware, compose, Store } from 'redux';
 
 import rootReducer from './root-reducer';
 import rootEpic from './root-epic';
+import loggerMiddleware from './logger-middleware';
 
 const initializeStore = (): Store => {
   const composeEnhancers =
@@ -19,7 +20,10 @@ const initializeStore = (): Store => {
     rootReducer, 
     initialState,
     composeEnhancers(
-      applyMiddleware(epicMiddleware)
+      applyMiddleware(
+        epicMiddleware,
+        loggerMiddleware
+      )
     )
   );
   
