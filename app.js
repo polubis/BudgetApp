@@ -16,7 +16,7 @@ const connectToDb = async () => {
     console.log('DB Connected');
   }
   catch(err) {
-    console.log(err);
+    console.log('DB Connection Error');
     process.exit(1);
   }
 }
@@ -36,9 +36,11 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Methods",
     "POST, GET, OPTIONS"
   );
+
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
+
   next();
 });
 
@@ -48,7 +50,9 @@ app.use('/graphql', graphQlHttp({
   schema: graphQlSchema,
   rootValue: graphQlResolvers,
   graphiql: true,
-  formatError: err => formatError.getError(err)
+  formatError: err => {
+    return formatError.getError(err);
+  }
 }));
 
 app.listen(3030);

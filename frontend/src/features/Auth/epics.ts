@@ -16,12 +16,12 @@ const aAt = authActionsTypes;
 const aA = authActions;
 const aGQ = authGrapQL;
 
-export const createAccountEpic: Epic<RootAction, RootAction> = (action$) =>
+export const createUserEpic: Epic<RootAction, RootAction> = (action$) =>
   action$.pipe(
     filter(isOfType(aAt.CREATE_ACCOUNT)),
     debounceTime(250),
     flatMap(action => 
-      callApi(aGQ.createAccountMutation(action.payload)).pipe(
+      callApi(aGQ.createUserMutation(action.payload)).pipe(
         map(res => aA.createAccountSuccess()),
         catchError((err) => of(aA.createAccountFailure())),
         takeUntil(action$.pipe(ofType(aAt.AUTH_CANCELLED)))

@@ -20,7 +20,7 @@ module.exports = {
       throw err;
     }
   },
-  createAccount: async ({userInput}) => {
+  createUser: async ({userInput}) => {
     try {
       const user = new User({
         ...userInput
