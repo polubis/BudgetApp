@@ -17,7 +17,7 @@
   }
 }
 
-.alert-appears {
+.alert--appears {
   animation: .3s alert-in forwards;
   @keyframes alert-in {
     from {
@@ -31,7 +31,7 @@
   }
 }
 
-.alert-repeated {
+.alert--repeated {
   animation: .3s alert-repeated forwards;
   @keyframes alert-repeated {
     from {
@@ -44,7 +44,7 @@
 
 }
 
-.alert-removed {
+.alert--removed {
   animation: .3s alert-out forwards;
   @keyframes alert-out {
     from {

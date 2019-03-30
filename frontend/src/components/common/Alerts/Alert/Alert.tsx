@@ -20,7 +20,7 @@ const icons: {[key: string]: string} = {
 
 class Alert extends React.Component<AlertProps & AlertDefinition, any> {
   state = {
-    alertAnimationClass: 'alert-appears'
+    alertAnimationClass: 'alert--appears'
   }
 
   currentTime = 0;
@@ -38,23 +38,21 @@ class Alert extends React.Component<AlertProps & AlertDefinition, any> {
 
   componentDidUpdate(prevProps: AlertProps & AlertDefinition) {
     if (prevProps.numberOfRepetitions !== this.props.numberOfRepetitions) {
-      this.setState({alertAnimationClass: 'alert-repeated'});
+      this.setState({alertAnimationClass: 'alert--repeated'});
       this.updateAlertTimer = setTimeout(() => this.setState({alertAnimationClass: ''}), 300);
       this.currentTime = 0;
     }
   }
 
   handleRemovingAlert = (id = this.props.id) => {
-    this.setState({alertAnimationClass: 'alert-removed'});
+    this.setState({alertAnimationClass: 'alert--removed'});
     this.removeAlertTimer = setTimeout(() => this.props.removeAlert(id), 300);
   }
 
   componentWillUnmount() {
     this.subject$.unsubscribe();
     clearTimeout(this.removeAlertTimer);
-    if (this.updateAlertTimer) {
-      clearTimeout(this.updateAlertTimer);
-    }
+    clearTimeout(this.updateAlertTimer);
   }
 
   render() {
