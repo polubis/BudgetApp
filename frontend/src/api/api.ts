@@ -4,7 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import store from '../store/index';
 import alertsDefinitions, { errorsBlackObject } from '../features/Alerts/alerts-definitions';
-import { addAlert } from '../features/Alerts/actions';
+import { pushAlert } from '../features/Alerts/actions';
 import { AlertDefinition } from '../features/Alerts/models';
 import { GraphQlBody, GrapQlResponse } from './models';
 
@@ -25,7 +25,7 @@ const prepareRequest = <T>(body: GraphQlBody<T>, token?: string): AxiosPromise<T
 }
 
 const handleAddNewAlert = (alert: AlertDefinition): void => {
-  store.dispatch(addAlert(alert));
+  store.dispatch(pushAlert(alert));
 }
   
 export const callApi = <T>(body: GraphQlBody<T>, token?: string): Observable<AxiosResponse<any>> => {
@@ -56,7 +56,7 @@ export const callApi = <T>(body: GraphQlBody<T>, token?: string): Observable<Axi
       let alert = alertsDefinitions.unknownError;
 
       if (err.message) {
-        alert = new AlertDefinition(requestId, err.message, 'error', 5000);
+        alert = new AlertDefinition(requestId, err.message, 'error');
       }
         
       handleAddNewAlert(alert);

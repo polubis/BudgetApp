@@ -18,10 +18,18 @@ const initialState: AlertsState = {
 };
 
 const actionMap: any = {
-  [aT.PUSH_ALERT]: (state: AlertsState, alert: AlertDefinition) => 
-  ({
-    ...state, alerts: [...state.alerts, alert]
-  }),
+  [aT.PUSH_ALERT]: (state: AlertsState, alert: AlertDefinition) => {
+    const alerts = [...state.alerts];
+    const alertIndex = state.alerts.findIndex(({id}) => id === alert.id);
+    if (alertIndex === -1) alerts.push(alert);
+    else {
+      alerts[alertIndex] = {...alert, 
+        numberOfRepetitions: ++alerts[alertIndex].numberOfRepetitions
+      };
+    }
+    
+    return { ...state, alerts };
+  },
   [aT.REMOVE_ALERT]: (state: AlertsState, alertId: string) => 
   ({
     ...state, alerts: state.alerts.filter(({id}) => id !== alertId)

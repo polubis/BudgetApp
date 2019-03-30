@@ -6,8 +6,6 @@ import * as alertTypes from './constants';
 
 const aT = alertTypes;
 
-export const addAlert = (alert: AlertDefinition) => action(aT.ADD_ALERT, alert);
-
 export const pushAlert = (alert: AlertDefinition) => action(aT.PUSH_ALERT, alert);
 
 export const removeAlert = (alertId: string) => action(aT.REMOVE_ALERT, alertId);
