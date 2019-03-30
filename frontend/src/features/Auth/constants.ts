@@ -1,6 +1,6 @@
-export const CREATE_ACCOUNT = `[Auth] CREATE_ACCOUNT`;
-export const CREATE_ACCOUNT_SUCCESS = `${CREATE_ACCOUNT}_SUCCESS`;
-export const CREATE_ACCOUNT_FAILURE = `${CREATE_ACCOUNT}_FAILURE`;
+export const CREATE_USER = `[Auth] CREATE_USER`;
+export const CREATE_USER_SUCCESS = `${CREATE_USER}_SUCCESS`;
+export const CREATE_USER_FAILURE = `${CREATE_USER}_FAILURE`;
 
 export const LOG_IN = '[Auth] LOG_IN';
 export const LOG_IN_SUCCESS = `${LOG_IN}_SUCCESS`;

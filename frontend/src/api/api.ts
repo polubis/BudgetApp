@@ -31,7 +31,6 @@ const handleAddNewAlert = (alert: AlertDefinition): void => {
 export const callApi = <T>(body: GraphQlBody<T>, token?: string): Observable<AxiosResponse<any>> => {
   const call = from(prepareRequest(body, token));  
   let requestId: any;
-
   return call.pipe(
     map((res: any) => {
       const { data, errors }: GrapQlResponse = res.data;

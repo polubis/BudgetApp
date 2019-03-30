@@ -3,12 +3,12 @@ import RegisterFormSettings from './form-config';
 
 import Form from '../../../components/common/Form/Form';
 
-import { CreateAccountPayload } from '../../../features/Auth/models';
+import { CreateUserPayload } from '../../../features/Auth/models';
 import { IRegister, IRegisterMethods } from './index';
 
 import './Register.scss';
 
-const Register = ({createAccount, isCreatingAccount, authCancelled}: IRegister & IRegisterMethods) => {
+const Register = ({createUser, isCreatingAccount, authCancelled}: IRegister & IRegisterMethods) => {
 
   useEffect(() => {
     return () => authCancelled();
@@ -20,7 +20,7 @@ const Register = ({createAccount, isCreatingAccount, authCancelled}: IRegister &
       btnTitle='Create account'
       btnClasses='bg-btn bg-btn--main btn--medium login-btn'
       settings={RegisterFormSettings}
-      actionAfterSubmit={values => createAccount(values as CreateAccountPayload)}
+      actionAfterSubmit={values => createUser(values as CreateUserPayload)}
       isOnSubmit={isCreatingAccount}
     />
   );

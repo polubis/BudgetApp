@@ -2,14 +2,14 @@ import { action } from 'typesafe-actions';
 
 import * as aTypes from './constants'; 
 
-import { CreateAccountPayload, LogInPayload } from './models';
+import { CreateUserPayload, LogInPayload } from './models';
 import { User } from 'Entities';
 
-export const createAccount = (payload: CreateAccountPayload) => action(aTypes.CREATE_ACCOUNT, payload);
+export const createUser = (payload: CreateUserPayload) => action(aTypes.CREATE_USER, payload);
 
-export const createAccountSuccess = () => action(aTypes.CREATE_ACCOUNT_SUCCESS);
+export const createUserSuccess = () => action(aTypes.CREATE_USER_SUCCESS);
 
-export const createAccountFailure = () => action(aTypes.CREATE_ACCOUNT_FAILURE);
+export const createUserFailure = () => action(aTypes.CREATE_USER_FAILURE);
 
 export const logIn = (payload: LogInPayload) => action(aTypes.LOG_IN, payload);
 

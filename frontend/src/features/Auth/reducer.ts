@@ -28,13 +28,13 @@ const initialState: AuthState = {
 };
 
 const actionMap: any = {
-  [aTypes.CREATE_ACCOUNT]: (state: AuthState) => ({
+  [aTypes.CREATE_USER]: (state: AuthState) => ({
     ...state, isCreatingAccount: true
   }),
-  [aTypes.CREATE_ACCOUNT_SUCCESS]: (state: AuthState) => ({
+  [aTypes.CREATE_USER_SUCCESS]: (state: AuthState) => ({
     ...state, isCreatingAccount: false
   }),
-  [aTypes.CREATE_ACCOUNT_FAILURE]: (state: AuthState) => ({
+  [aTypes.CREATE_USER_FAILURE]: (state: AuthState) => ({
     ...state, isCreatingAccount: false
   }),
 
