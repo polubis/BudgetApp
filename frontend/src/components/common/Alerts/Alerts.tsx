@@ -22,7 +22,7 @@ const Alerts = ({alerts, removeAlert}: AlertsProps) => (
       {alerts.map(alert => (
         <Alert 
           {...alert}
-          key={alert.id} 
+          key={alert.id + alert.message} 
           removeAlert={removeAlert}
         />
       ))}
@@ -30,8 +30,8 @@ const Alerts = ({alerts, removeAlert}: AlertsProps) => (
   </div>
 );
 
-const mapStateToProps = (state: StoreTypes.RootState) => ({
-  alerts: getAlerts(state.alerts.alertsReducer)
+const mapStateToProps = ({alerts}: StoreTypes.RootState) => ({
+  alerts: getAlerts(alerts.alertsReducer)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<StoreTypes.RootAction>) => 
