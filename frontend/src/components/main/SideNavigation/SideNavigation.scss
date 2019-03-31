@@ -1,0 +1,17 @@
+@import '../../../theme.scss';
+
+.side-navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: $main;
+  width: 60px;
+  height: 100vh;
+
+  .side-navigation__logo-wrap {
+    width: 60px;
+    height: 60px;
+    background: $white;
+    border-bottom: 1px solid $border;
+  }
+}

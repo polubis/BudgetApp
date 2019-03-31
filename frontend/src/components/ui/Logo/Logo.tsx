@@ -2,8 +2,13 @@ import React from 'react';
 
 import './Logo.scss';
 
-const Logo = () => (
-  <svg width="50.2" height="49.796" viewBox="0 0 50.2 49.796"><g transform="translate(-278 -30)"><g transform="translate(278 30)">
+type LogoProps = {
+  width?: string;
+  height?: string;
+}
+
+const Logo = ({height = '49.796', width = '50.2'}: LogoProps) => (
+  <svg width={width} height={height} viewBox="0 0 50.2 49.796"><g transform="translate(-278 -30)"><g transform="translate(278 30)">
     <path d="M7.35,27.249h0a14.585,14.585,0,1,1,15-25.01A25.572,25.572,0,0,0,7.292,25.52c0,.573.019,1.154.058,1.726Z" 
     transform="matrix(-0.966, -0.259, 0.259, -0.966, 43.148, 42.045)" fill="#8d9ad6"/>
     <path d="M14.583,27.249A14.584,14.584,0,0,1,7.35,0c-.038.562-.058,1.142-.058,1.727A25.575,25.575,0,0,0,22.348,25.012,14.54,14.54,0,0,1,14.583,27.249Z" 

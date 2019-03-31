@@ -1,0 +1,11 @@
+@import '../../theme.scss';
+
+#main-app {
+  min-height: 100vh;
+
+  main {
+    background: $app-bg;
+    margin-left: 60px;
+    min-height: calc(100vh - 60px);
+  }
+}
