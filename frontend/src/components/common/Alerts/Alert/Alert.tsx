@@ -1,7 +1,4 @@
 import React from 'react';
-import { interval } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 import MaterialIcon from '@material/react-material-icon';
 
 import { AlertDefinition } from '../../../../features/Alerts/models';
@@ -26,15 +23,13 @@ class Alert extends React.Component<AlertProps & AlertDefinition, any> {
   currentTime = 0;
   removeAlertTimer: any;
   updateAlertTimer: any;
-
-  subject$ = interval(1000).pipe(
-    map(() => {
-      this.currentTime += 1000;
-      if (this.currentTime >= this.props.closeTime) {
-        this.handleRemovingAlert();
-      }
-    })
-  ).subscribe();
+  
+  interval$ = setInterval(() => {
+    this.currentTime += 1000;
+    if (this.currentTime >= this.props.closeTime) {
+      this.handleRemovingAlert();
+    }
+  }, 1000); 
 
   componentDidUpdate(prevProps: AlertProps & AlertDefinition) {
     if (prevProps.numberOfRepetitions !== this.props.numberOfRepetitions) {
@@ -50,7 +45,7 @@ class Alert extends React.Component<AlertProps & AlertDefinition, any> {
   }
 
   componentWillUnmount() {
-    this.subject$.unsubscribe();
+    clearInterval(this.interval$);
     clearTimeout(this.removeAlertTimer);
     clearTimeout(this.updateAlertTimer);
   }
@@ -68,28 +63,3 @@ class Alert extends React.Component<AlertProps & AlertDefinition, any> {
 
 export default Alert;
 
-
-// const Alert = ({id, message, closeTime, type, removeAlert}: AlertProps & AlertDefinition) => {
-//   useEffect(() => {
-//     let timer: any;
-//     console.log("zmiana alertow");
-//     if (!timer) {
-//       timer = setTimeout(() => removeAlert(id), closeTime);
-//     }
-//     else {
-//       clearTimeout(timer);
-//       timer = setTimeout(() => removeAlert(id), closeTime);
-//     }
-
-//     return () => {
-//       clearTimeout(timer);
-//     }
-//   });
-
-//   return (
-//     <li className={`click alert alert--${type}`} onClick={() => removeAlert(id)}>
-//       <MaterialIcon icon={icons[type]} />
-//       <span className='alert__message'>{message}</span>
-//     </li>
-//   );
-// };
