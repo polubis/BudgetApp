@@ -1,7 +1,7 @@
 import React from 'react';
 
-import MaterialIcon from '@material/react-material-icon';
 import ValidationErrors from './ValidationErrors/ValidationErrors';
+import FormInput from './FormInput/FormInput';
 
 import { FormAppearanceSetting, ValidationResult } from 'FormTypes';
 import { Consumer, FormContext } from '../../context';
@@ -27,36 +27,34 @@ const FormGroup = ({id, value, errorsOccured, validationResult, icon, title, pla
     <Consumer>
       {({currentFocusedInput, changeFocusedInput, handleTyping}: FormContext) => (
         <section id={id} className='form-group'>
+
           <label htmlFor={title} className='form-group__label'>{title}</label>
 
-          <div className={`form-group__content ${contentClass}`}>
-
-            <input 
-              className='content__item'
-              id={title}
-              autoComplete='off'
-              placeholder={placeholder || 'type your ' + title + '...'} 
-              {...inputSettings}
-              value={value}
-              onChange={e => handleTyping(id, e)}
-              onFocus={() => changeFocusedInput(id)}
-              onBlur={() => changeFocusedInput('')}
-            />
-
-            {icon && 
-              <div className='content__rect row-c-c'>
-                <MaterialIcon icon={icon} />
-              </div>
-            }
-
-            {(errorsOccured && currentFocusedInput === id) && 
-              <ValidationErrors 
-                closeValidationErrors={() => changeFocusedInput('')}
-                validationResult={validationResult}
+          <FormInput 
+            icon={icon}
+            contentClasses={contentClass}
+            renderInput={() => (
+              <input 
+                className='content__item'
+                id={title}
+                autoComplete='off'
+                placeholder={placeholder || 'type your ' + title + '...'} 
+                {...inputSettings}
+                value={value}
+                onChange={e => handleTyping(id, e)}
+                onFocus={() => changeFocusedInput(id)}
+                onBlur={() => changeFocusedInput('')}
               />
+            )}
+            renderValidation={() => 
+              (errorsOccured && currentFocusedInput === id) ? 
+                <ValidationErrors 
+                  closeValidationErrors={() => changeFocusedInput('')}
+                  validationResult={validationResult}
+                />
+              : null
             }
-
-          </div>
+          />
 
         </section>
       )}

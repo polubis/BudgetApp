@@ -5,7 +5,7 @@ import './Navbar.scss';
 const Navbar = ({}) => (
   <header className='main-navbar'>
     <nav>
-
+      
     </nav>
   </header>
 );

@@ -1,0 +1,54 @@
+@import '../../../../../../theme.scss';
+
+.form-group__content {
+  height: 40px;
+  margin: 10px 0 30px 0;
+  display: flex;
+  border: 1px solid transparent;
+  color: $white;
+  position: relative;
+
+  .content__item {
+    padding: 0 15px;
+    height: 100%;
+    border: none;
+    background: none;
+    width: calc(100% - 40px);
+    font-family: 'Roboto', sans-serif;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: $l-font;
+    }
+  }
+
+  .content__rect {
+    height: 100%;
+    padding: 0 11px;
+    i {
+      font-size: 18px;
+    }
+  }
+}
+
+.form-group__content--ok {
+  border-color: $second;
+  .content__rect {
+    background: $second;
+  }
+}
+
+.form-group__content--error {
+  border-color: $error;
+  .content__rect {
+    background: $error;
+  }
+}
+
+.form-group__content--initial {
+  border-color: $main;
+  .content__rect {
+    background: $main;
+  }
+}
