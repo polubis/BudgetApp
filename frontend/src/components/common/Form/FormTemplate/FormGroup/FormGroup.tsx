@@ -19,47 +19,41 @@ const selectGroupClassByErrorsOccured = (errorsOccured?: boolean | null) =>
   errorsOccured === null ? 'form-group__content--initial' 
     : errorsOccured ? 'form-group__content--error' : 'form-group__content--ok';
 
-const FormGroup = ({id, value, errorsOccured, validationResult, icon, title, placeholder, inputSettings}: Props & FormAppearanceSetting) => {
+const FormGroup = ({id, value, errorsOccured, validationResult, icon, title, placeholder, inputSettings}: Props & FormAppearanceSetting) => 
+  <Consumer>
+    {({currentFocusedInput, changeFocusedInput, handleTyping}: FormContext) => (
+      <section id={id} className='form-group'>
 
-  const contentClass = selectGroupClassByErrorsOccured(errorsOccured);
+        <label htmlFor={title} className='form-group__label'>{title}</label>
 
-  return (
-    <Consumer>
-      {({currentFocusedInput, changeFocusedInput, handleTyping}: FormContext) => (
-        <section id={id} className='form-group'>
-
-          <label htmlFor={title} className='form-group__label'>{title}</label>
-
-          <FormInput 
-            icon={icon}
-            contentClasses={contentClass}
-            renderInput={() => (
-              <input 
-                className='content__item'
-                id={title}
-                autoComplete='off'
-                placeholder={placeholder || 'type your ' + title + '...'} 
-                {...inputSettings}
-                value={value}
-                onChange={e => handleTyping(id, e)}
-                onFocus={() => changeFocusedInput(id)}
-                onBlur={() => changeFocusedInput('')}
+        <FormInput 
+          icon={icon}
+          contentClasses={selectGroupClassByErrorsOccured(errorsOccured)}
+          renderInput={() => (
+            <input 
+              className='content__item'
+              id={title}
+              autoComplete='off'
+              placeholder={placeholder || 'type your ' + title + '...'} 
+              {...inputSettings}
+              value={value}
+              onChange={e => handleTyping(id, e)}
+              onFocus={() => changeFocusedInput(id)}
+              onBlur={() => changeFocusedInput('')}
+            />
+          )}
+          renderValidation={() => 
+            (errorsOccured && currentFocusedInput === id) ? 
+              <ValidationErrors 
+                closeValidationErrors={() => changeFocusedInput('')}
+                validationResult={validationResult}
               />
-            )}
-            renderValidation={() => 
-              (errorsOccured && currentFocusedInput === id) ? 
-                <ValidationErrors 
-                  closeValidationErrors={() => changeFocusedInput('')}
-                  validationResult={validationResult}
-                />
-              : null
-            }
-          />
+            : null
+          }
+        />
 
-        </section>
-      )}
-    </Consumer>
-  );
-}
+      </section>
+    )}
+  </Consumer>
 
 export default FormGroup;
