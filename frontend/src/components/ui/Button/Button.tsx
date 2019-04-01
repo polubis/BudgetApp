@@ -5,7 +5,7 @@ import Spinner from '../Spinner/Spinner';
 import './Button.scss';
 import MaterialIcon from '@material/react-material-icon';
 
-interface ButtonProps {
+type ButtonProps = {
   disabled?: boolean; 
   id?: string;
   showLoader?: boolean;
