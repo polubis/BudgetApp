@@ -35,7 +35,6 @@ const Login = ({isInAuthProcess, logIn, authCancelled}: ILogin & ILoginMethods) 
 
       <Button 
         id='forgot-pass-btn'
-        size='14'
         action={() => {}}
         classes='txt-btn txt-btn--l-font'
         title='forgot password?'

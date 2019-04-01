@@ -1,0 +1,40 @@
+@import '../../../../theme.scss';
+
+.salary-counter {
+  border-left: 1px solid $border;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  padding: 0 30px;
+  position: relative;
+
+  .salary-counter__spend {
+    
+    span {
+      font-size: 12px;
+      font-weight: bold;
+      color: $s-l-font;
+    }
+
+    span:last-of-type {
+      color: $main;
+    } 
+  }
+  
+  .salary-counter__budget {
+    margin-top: 2px;
+    font-size: 24px;
+    color: $l-font;
+  }
+
+  .salary-counter__progress {
+    height: 1px;
+    background: $main;
+    z-index: 2;
+    position: absolute;
+    width: 40%;
+    left: 0;
+    bottom: -1px;
+  }
+}

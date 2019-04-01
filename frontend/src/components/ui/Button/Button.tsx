@@ -3,28 +3,37 @@ import React from 'react';
 import Spinner from '../Spinner/Spinner';
 
 import './Button.scss';
+import MaterialIcon from '@material/react-material-icon';
 
 interface ButtonProps {
   disabled?: boolean; 
   id?: string;
   showLoader?: boolean;
-  classes: string;
+  classes?: string;
+  icon?: string;
   title: string;
-  size?: string; 
   action(params: any): any;
 };
 
 
-const Button = ({id, showLoader, classes, disabled, title, size, action}: ButtonProps) => (
+const Button = ({id, showLoader, classes = 'bg-btn bg-btn--main operation-btn', disabled, title, action, icon}: ButtonProps) => (
   <button
     disabled={disabled}
     onClick={action} 
     id={id} 
     title={title} 
     className={`btn ${classes} ${showLoader ? 'btn--loading' : ''}`}
-    style={{fontSize: size ? size + 'px' : 'initial'}}>
+  >
     
-    {title}
+    {icon && 
+      <MaterialIcon 
+        icon={icon}
+      />
+    }
+
+    <span>
+      {title}
+    </span>
 
     {showLoader && 
       <Spinner 
