@@ -10,7 +10,7 @@ type FormInputProps = {
   renderValidation?: () => React.ReactNode;
 }
 
-const FormInput = ({icon, renderInput, renderValidation, contentClasses = ''}: FormInputProps) => (
+const FormInput = ({icon, renderInput, renderValidation, contentClasses = 'form-group__content--initial'}: FormInputProps) => (
   <div className={`form-group__content ${contentClasses}`}>
 
     {renderInput()}

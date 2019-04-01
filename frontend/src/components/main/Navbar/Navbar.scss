@@ -1,9 +1,17 @@
 @import '../../../theme.scss';
 
 .main-navbar {
-  height: 60px;
-  margin-left: 60px;
-  width: calc(100% - 60px);
+  height: 80px;
+  margin-left: 80px;
+  width: calc(100% - 80px);
   background: $white;
   border-bottom: 1px solid $border;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+
+  nav {
+    width: 100%;
+    padding: 0 20px;
+  }
 }
